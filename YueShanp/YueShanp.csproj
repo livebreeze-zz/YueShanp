@@ -80,6 +80,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -202,8 +204,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\CostQuoted.cs" />
+    <Compile Include="Models\CostQuotedItem.cs" />
+    <Compile Include="Models\CostQuotedItemDetail.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Enum\EntityStatus.cs" />
+    <Compile Include="Models\Enum\ItemType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Quoted.cs" />
+    <Compile Include="Models\SimpleQuoted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
