@@ -28,7 +28,7 @@ namespace YueShanp.Models
             }
             else
             {
-                db.Customers.Add(instance);
+                this.db.Customers.Add(instance);
                 this.SaveChanges();
             }
         }
@@ -41,7 +41,7 @@ namespace YueShanp.Models
             }
             else
             {
-                db.Entry(instance).State = EntityState.Modified;
+                this.db.Entry(instance).State = EntityState.Modified;
                 this.SaveChanges();
             }
         }
@@ -54,19 +54,19 @@ namespace YueShanp.Models
             }
             else
             {
-                db.Entry(instance).State = EntityState.Deleted;
+                this.db.Entry(instance).State = EntityState.Deleted;
                 this.SaveChanges();
             }
         }
 
         public Customer Get(int customerId)
         {
-            return db.Customers.Find(customerId);
+            return this.db.Customers.Find(customerId);
         }
 
         public IQueryable<Customer> GetAll()
         {
-            return db.Customers.OrderByDescending(x => x.Id);
+            return this.db.Customers.OrderByDescending(x => x.Id);
         }
 
         public void SaveChanges()
