@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using YueShanp.Models.Interface;
 
-namespace YueShanp.Models.Repository
+namespace YueShanp.Models
 {
     public class CustomerRepository : ICustomerRepository, IDisposable
     {
@@ -61,7 +61,7 @@ namespace YueShanp.Models.Repository
 
         public Customer Get(int customerId)
         {
-            return db.Customers.FirstOrDefault(x => x.Id == customerId);
+            return db.Customers.Find(customerId);
         }
 
         public IQueryable<Customer> GetAll()

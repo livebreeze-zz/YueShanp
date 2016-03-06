@@ -10,7 +10,7 @@ namespace YueShanp.Models.Interface
 
         void Delete(Customer instance);
 
-        Customer Get(int categoryID);
+        Customer Get(int CustomerId);
 
         IQueryable<Customer> GetAll();
 

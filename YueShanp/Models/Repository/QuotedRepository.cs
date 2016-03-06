@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using YueShanp.Models.Interface;
 
-namespace YueShanp.Models.Repository
+namespace YueShanp.Models
 {
     public class QuotedRepository : IQuotedRepository, IDisposable
     {

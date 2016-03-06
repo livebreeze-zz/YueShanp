@@ -10,7 +10,7 @@ namespace YueShanp.Models.Interface
 
         void Delete(Quoted instance);
 
-        Quoted Get(int categoryID);
+        Quoted Get(int QuotedId);
 
         IQueryable<Quoted> GetAll();
 
