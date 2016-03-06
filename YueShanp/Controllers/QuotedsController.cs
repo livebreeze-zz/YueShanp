@@ -1,34 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using YueShanp.Models;
 using YueShanp.Models.Interface;
 
 namespace YueShanp.Controllers
 {
-    public class CustomersController : Controller
+    public class QuotedsController : Controller
     {
-        private ICustomerRepository customerRepository;
+        private IQuotedRepository QuotedRepository;
 
-        public CustomersController()
+        public QuotedsController()
         {
-            this.customerRepository = new CustomerRepository();
-        }        
-
-        // GET: Customers
-        public ActionResult Index()
-        {
-            var customers = this.customerRepository.GetAll();
-            return View(customers.ToList());
+            this.QuotedRepository = new QuotedRepository();
         }
 
-        // GET: Customers/Details/5
+        // GET: Quoteds
+        public ActionResult Index()
+        {
+            var Quoteds = this.QuotedRepository.GetAll();
+            return View(Quoteds.ToList());
+        }
+
+        // GET: Quoteds/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,93 +31,94 @@ namespace YueShanp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Customer customer = this.customerRepository.Get((int)id);
-            if (customer == null)
+            Quoted quoted = this.QuotedRepository.Get((int)id);
+            if (quoted == null)
             {
                 return HttpNotFound();
             }
 
-            return View(customer);
+            return View(quoted);
         }
 
-        // GET: Customers/Create
+        // GET: Quoteds/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Quoteds/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser,Creator,CreateTime,LastEditor,LastEditTime,EntityStatus")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,QuotedPrice,Remark,Creator,CreateTime,LastEditor,LastEditTime,EntityStatus")] Quoted quoted)
         {
             if (ModelState.IsValid)
             {
-                this.customerRepository.Create(customer);
+                this.QuotedRepository.Create(quoted);
                 //return RedirectToAction("Index");
             }
 
-            return View(customer);
+            return View(quoted);
         }
 
-        // GET: Customers/Edit/5
+        // GET: Quoteds/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Customer customer = this.customerRepository.Get((int)id);
-            if (customer == null)
+            Quoted quoted = this.QuotedRepository.Get((int)id);
+            if (quoted == null)
             {
                 return HttpNotFound();
             }
 
-            return View(customer);
+            return View(quoted);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Quoteds/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser,Creator,CreateTime,LastEditor,LastEditTime,EntityStatus")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,QuotedPrice,Remark,Creator,CreateTime,LastEditor,LastEditTime,EntityStatus")] Quoted quoted)
         {
             if (ModelState.IsValid)
             {
-                this.customerRepository.Update(customer);
+                this.QuotedRepository.Update(quoted);
                 //return RedirectToAction("Index");
             }
-            return View(customer);
+
+            return View(quoted);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Quoteds/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = this.customerRepository.Get((int)id);
-            if (customer == null)
+
+            Quoted quoted = this.QuotedRepository.Get((int)id);
+            if (quoted == null)
             {
                 return HttpNotFound();
             }
 
-            return View(customer);
+            return View(quoted);
         }
 
-        // POST: Customers/Delete/5
+        // POST: Quoteds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = this.customerRepository.Get(id);
-            this.customerRepository.Delete(customer);
+            Quoted quoted = this.QuotedRepository.Get(id);
+            this.QuotedRepository.Delete(quoted);
             return RedirectToAction("Index");
-        }       
+        }
     }
 }

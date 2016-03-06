@@ -201,6 +201,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QuotedsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -289,6 +290,11 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Quoteds\Create.cshtml" />
+    <Content Include="Views\Quoteds\Delete.cshtml" />
+    <Content Include="Views\Quoteds\Details.cshtml" />
+    <Content Include="Views\Quoteds\Edit.cshtml" />
+    <Content Include="Views\Quoteds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
