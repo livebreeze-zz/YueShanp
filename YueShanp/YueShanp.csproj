@@ -217,7 +217,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Quoted.cs" />
-    <Compile Include="Models\QuotedContext.cs" />
+    <Compile Include="Models\YueShanpContext.cs" />
     <Compile Include="Models\Repository\CustomerRepository.cs" />
     <Compile Include="Models\Repository\QuotedRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

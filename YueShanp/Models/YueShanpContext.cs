@@ -4,7 +4,7 @@ namespace YueShanp.Models
     using System.Data.Entity;
     using System.Linq;
 
-    public class QuotedContext : DbContext
+    public class YueShanpContext : DbContext
     {
         // Your context has been configured to use a 'QuotedContext' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
@@ -12,8 +12,8 @@ namespace YueShanp.Models
         // 
         // If you wish to target a different database and/or database provider, modify the 'QuotedContext' 
         // connection string in the application configuration file.
-        public QuotedContext()
-            : base("name=QuotedContext")
+        public YueShanpContext()
+            : base("name=YueShanpContext")
         {
         }
 
@@ -21,6 +21,9 @@ namespace YueShanp.Models
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
+        public DbSet<Quoted> Quoteds { get; set; }
+        //public DbSet<CostQuoted> CostQuoted { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 
     //public class MyEntity
