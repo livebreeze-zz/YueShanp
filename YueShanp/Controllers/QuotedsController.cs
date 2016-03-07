@@ -56,7 +56,7 @@ namespace YueShanp.Controllers
             if (ModelState.IsValid)
             {
                 this.QuotedRepository.Create(quoted);
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             return View(quoted);
