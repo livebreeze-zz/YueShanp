@@ -24,7 +24,7 @@ namespace YueShanp.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = this.customerRepository.GetAll();
+            var customers = this.customerRepository.GetAll().Where(w => w.EntityStatus == EntityStatus.Enabled);
             return View(customers.ToList());
         }
 
@@ -56,12 +56,17 @@ namespace YueShanp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser,Creator,CreateTime,LastEditor,LastEditTime,EntityStatus")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser")] Customer customer)
         {
+            customer.Creator = "admin";
+            customer.CreateTime = DateTime.Now;
+            customer.LastEditor = "admin";
+            customer.LastEditTime = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 this.customerRepository.Create(customer);
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             return View(customer);
@@ -89,12 +94,15 @@ namespace YueShanp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser,Creator,CreateTime,LastEditor,LastEditTime,EntityStatus")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser,Creator,CreateTime")] Customer customer)
         {
+            customer.LastEditor = "admin";
+            customer.LastEditTime = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 this.customerRepository.Update(customer);
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             return View(customer);
         }
@@ -121,7 +129,14 @@ namespace YueShanp.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Customer customer = this.customerRepository.Get(id);
-            this.customerRepository.Delete(customer);
+
+            customer.LastEditor = "admin";
+            customer.LastEditTime = DateTime.Now;
+            customer.EntityStatus = EntityStatus.Deleted;
+            this.customerRepository.Update(customer);
+
+            //this.customerRepository.Delete(customer);
+
             return RedirectToAction("Index");
         }       
     }
