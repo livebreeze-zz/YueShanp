@@ -19,7 +19,7 @@ namespace YueShanp.Controllers
         public CustomersController()
         {
             this.customerRepository = new CustomerRepository();
-        }        
+        }
 
         // GET: Customers
         public ActionResult Index()
@@ -58,13 +58,13 @@ namespace YueShanp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser")] Customer customer)
         {
-            customer.Creator = "admin";
-            customer.CreateTime = DateTime.Now;
-            customer.LastEditor = "admin";
-            customer.LastEditTime = DateTime.Now;
-
             if (ModelState.IsValid)
             {
+                customer.Creator = "admin";
+                customer.CreateTime = DateTime.Now;
+                customer.LastEditor = "admin";
+                customer.LastEditTime = DateTime.Now;
+
                 this.customerRepository.Create(customer);
                 return RedirectToAction("Index");
             }
@@ -96,11 +96,11 @@ namespace YueShanp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser,Creator,CreateTime")] Customer customer)
         {
-            customer.LastEditor = "admin";
-            customer.LastEditTime = DateTime.Now;
-
             if (ModelState.IsValid)
             {
+                customer.LastEditor = "admin";
+                customer.LastEditTime = DateTime.Now;
+
                 this.customerRepository.Update(customer);
                 return RedirectToAction("Index");
             }
@@ -138,6 +138,6 @@ namespace YueShanp.Controllers
             //this.customerRepository.Delete(customer);
 
             return RedirectToAction("Index");
-        }       
+        }
     }
 }

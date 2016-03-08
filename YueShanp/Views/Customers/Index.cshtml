@@ -47,6 +47,7 @@
             @Html.DisplayFor(modelItem => item.Purchaser)
         </td>
         <td>
+            @Html.ActionLink("報價", "Index", "Quoteds", new { customerId = item.Id }, null) |
             @Html.ActionLink("編輯", "Edit", new { id=item.Id }) |
             @Html.ActionLink("詳細資料", "Details", new { id=item.Id }) |
             @Html.ActionLink("刪除", "Delete", new { id=item.Id })

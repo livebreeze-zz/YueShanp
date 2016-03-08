@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+a, address, article, aside, footer,
+h1, h2, h3, h4, h5, h6,
+i, dl, dt, dd, ol, ul, li,
+form, label, legend, mark, menu, nav, object, output,
+p, pre, q, ruby, s, samp, span, section,
+small, strong, sub, summary, sup,
+table, tbody, td, tfoot, th, thead, tr, u, var {
+    font-family: 'Noto Sans TC', sans-serif;
+}
