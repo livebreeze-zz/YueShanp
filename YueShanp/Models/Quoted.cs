@@ -12,6 +12,7 @@ namespace YueShanp.Models
         [DisplayName("產品報價")]
         public decimal QuotedPrice { get; set; }
 
+        [DisplayName("備註")]
         public string Remark { get; set; }
     }
 }

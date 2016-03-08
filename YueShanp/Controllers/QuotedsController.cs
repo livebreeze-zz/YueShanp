@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -9,18 +10,28 @@ namespace YueShanp.Controllers
 {
     public class QuotedsController : Controller
     {
+        private ICustomerRepository CustomerRepository;
         private IQuotedRepository QuotedRepository;
 
         public QuotedsController()
         {
+            this.CustomerRepository = new CustomerRepository();
             this.QuotedRepository = new QuotedRepository();
         }
 
         // GET: Quoteds
-        public ActionResult Index()
+        public ActionResult Index(int? customerId)
         {
-            var Quoteds = this.QuotedRepository.GetAll();
-            return View(Quoteds.ToList());
+            if (customerId == null)
+            {
+                return RedirectToAction("Index", "Customers");
+            }
+
+            var customer = this.CustomerRepository.Get((int)customerId);
+            var quoteds = this.QuotedRepository.GetAll().Where(w => w.Customer.Id == (int)customerId);
+            ViewData["Customer"] = customer;
+
+            return View(quoteds.ToList());
         }
 
         // GET: Quoteds/Details/5
@@ -41,9 +52,15 @@ namespace YueShanp.Controllers
         }
 
         // GET: Quoteds/Create
-        public ActionResult Create()
+        public ActionResult Create(int customerId)
         {
-            return View();
+            var customer = this.CustomerRepository.Get(customerId);
+            var quoted = new Quoted()
+            {
+                Customer = customer
+            };
+
+            return View(quoted);
         }
 
         // POST: Quoteds/Create
@@ -51,12 +68,19 @@ namespace YueShanp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,QuotedPrice,Remark,Creator,CreateTime,LastEditor,LastEditTime,EntityStatus")] Quoted quoted)
+        public ActionResult Create([Bind(Include = "Id,QuotedPrice,Remark,Product.Name,Customer.Id")] Quoted quoted)
         {
             if (ModelState.IsValid)
             {
+                quoted.Customer = this.CustomerRepository.Get(quoted.Customer.Id);
+                quoted.Creator = "admin";
+                quoted.CreateTime = DateTime.Now;
+                quoted.LastEditor = "admin";
+                quoted.LastEditTime = DateTime.Now;
+                quoted.EntityStatus = EntityStatus.Enabled;
+
                 this.QuotedRepository.Create(quoted);
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             return View(quoted);
@@ -69,6 +93,7 @@ namespace YueShanp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Quoted quoted = this.QuotedRepository.Get((int)id);
             if (quoted == null)
             {
@@ -83,12 +108,16 @@ namespace YueShanp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,QuotedPrice,Remark,Creator,CreateTime,LastEditor,LastEditTime,EntityStatus")] Quoted quoted)
+        public ActionResult Edit([Bind(Include = "Id,QuotedPrice,Remark,Product.Name")] Quoted quoted)
         {
             if (ModelState.IsValid)
             {
+                quoted.LastEditor = "admin";
+                quoted.LastEditTime = DateTime.Now;
+                quoted.EntityStatus = EntityStatus.Enabled;
+
                 this.QuotedRepository.Update(quoted);
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             return View(quoted);
@@ -117,7 +146,12 @@ namespace YueShanp.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Quoted quoted = this.QuotedRepository.Get(id);
-            this.QuotedRepository.Delete(quoted);
+
+            quoted.LastEditor = "admin";
+            quoted.LastEditTime = DateTime.Now;
+            quoted.EntityStatus = EntityStatus.Deleted;
+
+            //this.QuotedRepository.Delete(quoted);
             return RedirectToAction("Index");
         }
     }
