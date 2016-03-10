@@ -74,6 +74,7 @@ namespace YueShanp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,QuotedPrice,Remark,Product,Customer")] Quoted quoted)
         {
+            var test = string.Empty;
             if (ModelState.IsValid)
             {
                 quoted.Customer = this.CustomerRepository.Get(quoted.Customer.Id);
