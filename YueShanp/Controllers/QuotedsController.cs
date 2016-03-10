@@ -12,6 +12,7 @@ namespace YueShanp.Controllers
     {
         private ICustomerRepository CustomerRepository;
         private IQuotedRepository QuotedRepository;
+        private readonly string Creator = "admin";
 
         public QuotedsController()
         {
@@ -20,22 +21,25 @@ namespace YueShanp.Controllers
         }
 
         // GET: Quoteds
-        public ActionResult Index(int? customerId)
+        public ActionResult QuotedsMaster(int? customerId)
         {
             if (customerId == null)
             {
-                return RedirectToAction("Index", "Customers");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return RedirectToAction("Index", "Customers");
             }
 
-            var customer = this.CustomerRepository.Get((int)customerId);
-            var quoteds = this.QuotedRepository.GetAll().Where(w => w.Customer.Id == (int)customerId);
-            ViewData["Customer"] = customer;
+            var viewModel = new QuotedsMasterViewModel()
+            {
+                Customer = this.CustomerRepository.Get((int)customerId),
+                QuotedList = this.QuotedRepository.GetAll().Where(w => w.Customer.Id == (int)customerId)
+            };
 
-            return View(quoteds.ToList());
+            return View(viewModel);
         }
 
         // GET: Quoteds/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult QuotedsDetail(int? id)
         {
             if (id == null)
             {
@@ -68,19 +72,25 @@ namespace YueShanp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,QuotedPrice,Remark,Product.Name,Customer.Id")] Quoted quoted)
+        public ActionResult Create([Bind(Include = "Id,QuotedPrice,Remark,Product,Customer")] Quoted quoted)
         {
             if (ModelState.IsValid)
             {
                 quoted.Customer = this.CustomerRepository.Get(quoted.Customer.Id);
-                quoted.Creator = "admin";
+                quoted.Creator = this.Creator;
                 quoted.CreateTime = DateTime.Now;
-                quoted.LastEditor = "admin";
+                quoted.LastEditor = this.Creator;
                 quoted.LastEditTime = DateTime.Now;
                 quoted.EntityStatus = EntityStatus.Enabled;
 
-                this.QuotedRepository.Create(quoted);
-                return RedirectToAction("Index");
+                quoted.Product.Name = quoted.Product.Name;
+                quoted.Product.Creator = this.Creator;
+                quoted.Product.CreateTime = DateTime.Now;
+                quoted.Product.LastEditor = this.Creator;
+                quoted.Product.LastEditTime = DateTime.Now;
+
+                this.QuotedRepository.CreateProductQuoted(quoted);
+                return RedirectToAction("QuotedsMaster", new { CustomerId = quoted.Customer.Id });
             }
 
             return View(quoted);
@@ -112,12 +122,12 @@ namespace YueShanp.Controllers
         {
             if (ModelState.IsValid)
             {
-                quoted.LastEditor = "admin";
+                quoted.LastEditor = this.Creator;
                 quoted.LastEditTime = DateTime.Now;
                 quoted.EntityStatus = EntityStatus.Enabled;
 
                 this.QuotedRepository.Update(quoted);
-                return RedirectToAction("Index");
+                return RedirectToAction("QuotedsMaster");
             }
 
             return View(quoted);
@@ -147,12 +157,12 @@ namespace YueShanp.Controllers
         {
             Quoted quoted = this.QuotedRepository.Get(id);
 
-            quoted.LastEditor = "admin";
+            quoted.LastEditor = this.Creator;
             quoted.LastEditTime = DateTime.Now;
             quoted.EntityStatus = EntityStatus.Deleted;
 
             //this.QuotedRepository.Delete(quoted);
-            return RedirectToAction("Index");
+            return RedirectToAction("QuotedsMaster");
         }
     }
 }

@@ -5,8 +5,8 @@ namespace YueShanp.Models
 {
     public class Quoted : BaseEntity<int>
     {
-        public Customer Customer { get; set; }
-        public Product Product { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual Product Product { get; set; }
 
         [Required]
         [DisplayName("產品報價")]

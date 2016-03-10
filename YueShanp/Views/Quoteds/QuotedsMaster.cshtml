@@ -1,9 +1,10 @@
 ﻿@using YueShanp.Models
-@model IEnumerable<YueShanp.Models.Quoted>
+@model QuotedsMasterViewModel
 
 @{
     ViewBag.Title = "Index";
-    var customer = (Customer)ViewData["Customer"];
+
+    var customer = Model.Customer;
 }
 
 <h2>@customer.Name 報價</h2>
@@ -14,19 +15,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Product.Name)
+            @Html.DisplayNameFor(model => model.QuotedList.FirstOrDefault().Product.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QuotedPrice)
+            @Html.DisplayNameFor(model => model.QuotedList.FirstOrDefault().QuotedPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Remark)
+            @Html.DisplayNameFor(model => model.QuotedList.FirstOrDefault().Remark)
         </th>
 
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.QuotedList)
     {
         <tr>
             <td>
@@ -41,7 +42,7 @@
 
             <td>
                 @Html.ActionLink("編輯", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("詳細資料", "Details", new { id = item.Id }) |
+                @Html.ActionLink("詳細資料", "QuotedsDetail", new { id = item.Id }) |
                 @Html.ActionLink("刪除", "Delete", new { id = item.Id })
             </td>
         </tr>
