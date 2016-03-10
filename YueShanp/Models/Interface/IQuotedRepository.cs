@@ -4,7 +4,7 @@ namespace YueShanp.Models.Interface
 {
     interface IQuotedRepository
     {
-        void Create(Quoted instance);
+        void CreateProductQuoted(Quoted instance);
 
         void Update(Quoted instance);
 

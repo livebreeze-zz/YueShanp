@@ -219,6 +219,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Quoted.cs" />
+    <Compile Include="Models\Quoteds\QuotedsMasterViewModel.cs" />
     <Compile Include="Models\YueShanpContext.cs" />
     <Compile Include="Models\Repository\CustomerRepository.cs" />
     <Compile Include="Models\Repository\QuotedRepository.cs" />
@@ -252,7 +253,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -293,9 +296,9 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Quoteds\Create.cshtml" />
     <Content Include="Views\Quoteds\Delete.cshtml" />
-    <Content Include="Views\Quoteds\Details.cshtml" />
+    <Content Include="Views\Quoteds\QuotedsDetail.cshtml" />
     <Content Include="Views\Quoteds\Edit.cshtml" />
-    <Content Include="Views\Quoteds\Index.cshtml" />
+    <Content Include="Views\Quoteds\QuotedsMaster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

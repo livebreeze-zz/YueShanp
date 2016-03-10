@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace YueShanp.Models
@@ -26,5 +27,7 @@ namespace YueShanp.Models
 
         [DisplayName("採購姓名")]
         public string Purchaser { get; set; }
+
+        public virtual ICollection<Quoted> Quoteds { get; set; }
     }
 }

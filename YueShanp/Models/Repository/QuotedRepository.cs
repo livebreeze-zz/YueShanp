@@ -20,7 +20,7 @@ namespace YueShanp.Models
             this.db = new YueShanpContext();
         }
 
-        public void Create(Quoted instance)
+        public void CreateProductQuoted(Quoted instance)
         {
             if (instance == null)
             {
@@ -29,6 +29,9 @@ namespace YueShanp.Models
             else
             {
                 db.Quoteds.Add(instance);
+
+                // Use this setting to not do add or update for Customer data.
+                db.Entry(instance.Customer).State = EntityState.Unchanged;
                 this.SaveChanges();
             }
         }

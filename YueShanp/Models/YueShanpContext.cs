@@ -21,7 +21,8 @@ namespace YueShanp.Models
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
-        public DbSet<Quoted> Quoteds { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Quoted> Quoteds { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
