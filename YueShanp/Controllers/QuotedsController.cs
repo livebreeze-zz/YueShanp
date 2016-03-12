@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+
 using YueShanp.Models;
 using YueShanp.Models.Interface;
 
 namespace YueShanp.Controllers
 {
+    [Authorize]
     public class QuotedsController : Controller
     {
         private ICustomerRepository CustomerRepository;
         private IQuotedRepository QuotedRepository;
-        private readonly string Creator = "admin";
 
         public QuotedsController()
         {
@@ -21,6 +22,7 @@ namespace YueShanp.Controllers
         }
 
         // GET: Quoteds
+        [AllowAnonymous]
         public ActionResult QuotedsMaster(int? customerId)
         {
             if (customerId == null)
@@ -39,6 +41,7 @@ namespace YueShanp.Controllers
         }
 
         // GET: Quoteds/Details/5
+        [AllowAnonymous]
         public ActionResult QuotedsDetail(int? id)
         {
             if (id == null)
@@ -77,23 +80,25 @@ namespace YueShanp.Controllers
             if (ModelState.IsValid)
             {
                 quoted.Customer = this.CustomerRepository.Get(quoted.Customer.Id);
-                quoted.Creator = this.Creator;
+                quoted.Creator = User.Identity.GetUserName();
                 quoted.CreateTime = DateTime.Now;
-                quoted.LastEditor = this.Creator;
+                quoted.LastEditor = User.Identity.GetUserName();
                 quoted.LastEditTime = DateTime.Now;
                 quoted.EntityStatus = EntityStatus.Enabled;
 
                 quoted.Product.Name = quoted.Product.Name;
-                quoted.Product.Creator = this.Creator;
+                quoted.Product.Creator = User.Identity.GetUserName();
                 quoted.Product.CreateTime = DateTime.Now;
-                quoted.Product.LastEditor = this.Creator;
+                quoted.Product.LastEditor = User.Identity.GetUserName();
                 quoted.Product.LastEditTime = DateTime.Now;
 
                 this.QuotedRepository.CreateProductQuoted(quoted);
                 return RedirectToAction("QuotedsMaster", new { CustomerId = quoted.Customer.Id });
             }
-
-            return View(quoted);
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         // GET: Quoteds/Edit/5
@@ -118,11 +123,11 @@ namespace YueShanp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,QuotedPrice,Remark,Product.Name")] Quoted quoted)
+        public ActionResult Edit([Bind(Include = "Id,QuotedPrice,Remark,Product,Customer")] Quoted quoted)
         {
             if (ModelState.IsValid)
             {
-                quoted.LastEditor = this.Creator;
+                quoted.LastEditor = User.Identity.GetUserName();
                 quoted.LastEditTime = DateTime.Now;
                 quoted.EntityStatus = EntityStatus.Enabled;
 
@@ -157,12 +162,13 @@ namespace YueShanp.Controllers
         {
             Quoted quoted = this.QuotedRepository.Get(id);
 
-            quoted.LastEditor = this.Creator;
+            quoted.LastEditor = User.Identity.GetUserName();
             quoted.LastEditTime = DateTime.Now;
             quoted.EntityStatus = EntityStatus.Deleted;
 
-            //this.QuotedRepository.Delete(quoted);
-            return RedirectToAction("QuotedsMaster");
+            this.QuotedRepository.Delete(quoted);
+
+            return RedirectToAction("QuotedsMaster", new { CustomerId = quoted.Customer.Id });
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace YueShanp.Models
@@ -9,7 +8,5 @@ namespace YueShanp.Models
         [Required]
         [DisplayName("名稱")]
         public string Name { get; set; }
-
-        public virtual ICollection<Quoted> Quoteds { get; set; }
     }
 }

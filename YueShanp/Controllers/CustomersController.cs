@@ -12,6 +12,7 @@ using YueShanp.Models.Interface;
 
 namespace YueShanp.Controllers
 {
+    [Authorize]
     public class CustomersController : Controller
     {
         private ICustomerRepository customerRepository;
@@ -22,6 +23,7 @@ namespace YueShanp.Controllers
         }
 
         // GET: Customers
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var customers = this.customerRepository.GetAll().Where(w => w.EntityStatus == EntityStatus.Enabled);
@@ -29,6 +31,7 @@ namespace YueShanp.Controllers
         }
 
         // GET: Customers/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)

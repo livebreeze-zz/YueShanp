@@ -44,6 +44,7 @@ namespace YueShanp.Models
             }
             else
             {
+                db.Entry(instance.Customer).State = EntityState.Unchanged;
                 db.Entry(instance).State = EntityState.Modified;
                 this.SaveChanges();
             }
