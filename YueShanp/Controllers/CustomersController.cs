@@ -59,7 +59,7 @@ namespace YueShanp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,Name,Phone,Fax,Address,Email,Purchaser")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace YueShanp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Address,Email,Purchaser,Creator,CreateTime")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Fax,Address,Email,Purchaser,Creator,CreateTime")] Customer customer)
         {
             if (ModelState.IsValid)
             {

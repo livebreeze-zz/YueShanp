@@ -1,10 +1,10 @@
-﻿@model YueShanp.Models.Quoted
+﻿@model YueShanp.Models.Product
 
 @{
-    ViewBag.Title = "報價編輯";
+    ViewBag.Title = "編輯商品報價";
 }
 
-<h2>報價編輯</h2>
+<h2>編輯商品報價</h2>
 
 
 @using (Html.BeginForm())
@@ -12,16 +12,16 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>編輯產品: @Model.Product.Name 之報價內容</h4>
+        <h3>@Model.Customer.Name - @Model.Name</h3>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Product.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Product.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -34,14 +34,12 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @Html.HiddenFor(model => model.Customer.Id)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -52,7 +50,7 @@
 }
 
 <div>
-    @Html.ActionLink("返回報價清單", "QuotedsMaster", new { CustomerId = Model.Customer.Id })
+    @Html.ActionLink("返回報價清單", "ProductsMaster", new { CustomerId = Model.Customer.Id })
 </div>
 
 @section Scripts {

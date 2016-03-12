@@ -5,9 +5,9 @@ using System.Web;
 
 namespace YueShanp.Models
 {
-    public class QuotedsMasterViewModel
+    public class ProductsMasterViewModel
     {
         public Customer Customer { get; set; }
-        public IEnumerable<Quoted> QuotedList { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

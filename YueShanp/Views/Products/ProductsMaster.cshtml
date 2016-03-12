@@ -1,13 +1,12 @@
 ﻿@using YueShanp.Models
-@model QuotedsMasterViewModel
+@model ProductsMasterViewModel
 
 @{
-    ViewBag.Title = "Index";
-
     var customer = Model.Customer;
+    ViewBag.Title = customer + " - 報價清單";
 }
 
-<h2>@customer.Name 報價</h2>
+<h2>@customer.Name - 報價</h2>
 
 <p>
     @Html.ActionLink("新增報價", "Create", new { customerId = customer.Id })
@@ -15,34 +14,34 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.QuotedList.FirstOrDefault().Product.Name)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QuotedList.FirstOrDefault().QuotedPrice)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().QuotedPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QuotedList.FirstOrDefault().Remark)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Note)
         </th>
 
         <th></th>
     </tr>
 
-    @foreach (var item in Model.QuotedList)
+    @foreach (var item in Model.Products)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.QuotedPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Remark)
+                @Html.DisplayFor(modelItem => item.Note)
             </td>
 
             <td>
                 @Html.ActionLink("編輯", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("詳細資料", "QuotedsDetail", new { id = item.Id }) |
+                @Html.ActionLink("詳細資料", "ProductDetail", new { id = item.Id }) |
                 @Html.ActionLink("刪除", "Delete", new { id = item.Id })
             </td>
         </tr>

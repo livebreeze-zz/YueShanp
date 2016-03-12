@@ -1,4 +1,4 @@
-﻿@model YueShanp.Models.Quoted
+﻿@model YueShanp.Models.Product
 
 @{
     ViewBag.Title = "報價商品詳細清單";
@@ -7,7 +7,7 @@
 <h2>報價商品詳細清單</h2>
 
 <div>
-    <h4>@Model.Product.Name</h4>
+    <h3><span class="masthead">@Model.Customer.Name - @Model.Name</span> 報</h3>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,11 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Remark)
+            @Html.DisplayNameFor(model => model.Note)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Remark)
+            @Html.DisplayFor(model => model.Note)
         </dd>
 
         <dt>
@@ -70,5 +70,5 @@
 </div>
 <p>
     @Html.ActionLink("編輯", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("報價清單", "Index")
+    @Html.ActionLink("返回報價清單", "ProductsMaster", new { CustomerId = Model.Customer.Id })
 </p>

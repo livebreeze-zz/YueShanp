@@ -22,7 +22,6 @@ namespace YueShanp.Models
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Quoted> Quoteds { get; set; }
         public DbSet<Product> Products { get; set; }
     }
 }

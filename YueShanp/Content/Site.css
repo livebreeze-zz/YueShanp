@@ -32,3 +32,7 @@ small, strong, sub, summary, sup,
 table, tbody, td, tfoot, th, thead, tr, u, var {
     font-family: 'Noto Sans TC', sans-serif;
 }
+
+.masthead {
+    background-color: @brand-primary;
+}

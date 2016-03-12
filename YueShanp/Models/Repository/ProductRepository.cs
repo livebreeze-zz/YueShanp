@@ -5,7 +5,7 @@ using YueShanp.Models.Interface;
 
 namespace YueShanp.Models
 {
-    public class QuotedRepository : IQuotedRepository, IDisposable
+    public class ProductRepository : IProductRepository, IDisposable
     {
         private const string ARGUMENTNULLEXCEPTIONPARAM = "instance";
 
@@ -15,12 +15,12 @@ namespace YueShanp.Models
             private set;
         }
 
-        public QuotedRepository()
+        public ProductRepository()
         {
             this.db = new YueShanpContext();
         }
 
-        public void CreateProductQuoted(Quoted instance)
+        public void CreateProductQuoted(Product instance)
         {
             if (instance == null)
             {
@@ -28,7 +28,7 @@ namespace YueShanp.Models
             }
             else
             {
-                db.Quoteds.Add(instance);
+                db.Products.Add(instance);
 
                 // Use this setting to not do add or update for Customer data.
                 db.Entry(instance.Customer).State = EntityState.Unchanged;
@@ -36,7 +36,7 @@ namespace YueShanp.Models
             }
         }
 
-        public void Update(Quoted instance)
+        public void Update(Product instance)
         {
             if (instance == null)
             {
@@ -50,7 +50,7 @@ namespace YueShanp.Models
             }
         }
 
-        public void Delete(Quoted instance)
+        public void Delete(Product instance)
         {
             if (instance == null)
             {
@@ -63,14 +63,14 @@ namespace YueShanp.Models
             }
         }
 
-        public Quoted Get(int QuotedId)
+        public Product Get(int ProductId)
         {
-            return db.Quoteds.FirstOrDefault(x => x.Id == QuotedId);
+            return db.Products.FirstOrDefault(x => x.Id == ProductId);
         }
 
-        public IQueryable<Quoted> GetAll()
+        public IQueryable<Product> GetAll()
         {
-            return db.Quoteds.OrderByDescending(x => x.Id);
+            return db.Products.OrderByDescending(x => x.Id);
         }
 
         public void SaveChanges()

@@ -8,7 +8,7 @@
 
 <h3>確定要刪除此客戶資料?</h3>
 <div>
-    <h4>Customer</h4>
+    <h3>@Model.Name</h3>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -28,69 +28,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Purchaser)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Purchaser)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Creator)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Creator)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastEditor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastEditor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastEditTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastEditTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EntityStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EntityStatus)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
