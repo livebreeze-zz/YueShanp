@@ -10,10 +10,10 @@ namespace YueShanp.Models
         // configuration file (App.config or Web.config). By default, this connection string targets the 
         // 'YueShanp.Models.YueShanpContext' database on your LocalDb instance. 
         // 
-        // If you wish to target a different database and/or database provider, modify the 'YueShanpContext' 
+        // If you wish to target a different database and/or database provider, modify the 'YueShanpConnection' 
         // connection string in the application configuration file.
         public YueShanpContext()
-            : base("name=YueShanpContext")
+            : base("name=YueShanpConnection")
         {
         }
 
