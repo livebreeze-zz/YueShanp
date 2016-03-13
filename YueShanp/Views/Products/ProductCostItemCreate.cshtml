@@ -62,7 +62,7 @@
     }
 
     <div>
-        @Html.ActionLink("返回產品項目內容", "ProductCostCreate")
+        @Html.ActionLink(string.Format("返回{0}成本項目清單", Model.Product.Name), "ProductCostItems", new { ProductId = Model.Product.Id })
     </div>
 
     @section Scripts {

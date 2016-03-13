@@ -161,6 +161,7 @@ namespace YueShanp.Controllers
             return RedirectToAction("ProductsMaster", new { CustomerId = product.Customer.Id });
         }
 
+        #region Product cost item
         public ActionResult ProductCostItems(int? productId)
         {
             if (productId == null)
@@ -208,19 +209,60 @@ namespace YueShanp.Controllers
             return View(costItem);
         }        
 
-        public ActionResult ProductCostEdit()
+        public ActionResult ProductCostItemEdit(int? costItemId)
         {
+            if (costItemId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var costItem = this.costItemRepository.Get((int)costItemId);
+
+            return View(costItem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProductCostItemEdit([Bind(Include ="Name,UnitPrice,ItemQty,ItemType,Product")]CostItem costItem)
+        {
+            if (ModelState.IsValid)
+            {
+                EntityHelper<CostItem>.EditBaseEntity(costItem, User.Identity.Name);
+                this.costItemRepository.Update(costItem);
+
+                return RedirectToAction("ProductCostItems", new { ProductId = costItem.Product.Id });
+            }
+
+            return View(costItem);
+        }        
+
+        public ActionResult ProductCostItemDelete(int? costItemId)
+        {
+            if (costItemId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var costItem = this.costItemRepository.Get((int)costItemId);
+            if (costItemId == null)
+            {
+                return HttpNotFound();
+            }
+
             return View();
         }
 
-        public ActionResult ProductCostDetails()
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCostItemConfirmed(int costItemId)
         {
-            return View();
-        }
+            var costItem = this.costItemRepository.Get(costItemId);
 
-        public ActionResult ProductCostDelete()
-        {
-            return View();
+            EntityHelper<CostItem>.EditBaseEntity(costItem, User.Identity.Name, EntityStatus.Deleted);
+            this.costItemRepository.Update(costItem);
+
+            return RedirectToAction("ProductCostItems", new { ProductId = costItem.Product.Id });
         }
+        #endregion
     }
 }

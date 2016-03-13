@@ -302,6 +302,8 @@
     <Content Include="Views\Products\ProductsMaster.cshtml" />
     <Content Include="Views\Products\ProductCostItems.cshtml" />
     <Content Include="Views\Products\ProductCostItemCreate.cshtml" />
+    <Content Include="Views\Products\ProductCostItemEdit.cshtml" />
+    <Content Include="Views\Products\ProductCostItemDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

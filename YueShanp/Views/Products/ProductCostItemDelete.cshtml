@@ -1,0 +1,55 @@
+﻿@model YueShanp.Models.CostItem
+
+@{
+    ViewBag.Title = "成本項目刪除";
+}
+
+<h2>@Model.Product.Name</h2>
+
+<h3>確定要刪除 @Model.Name ?</h3>
+<div>
+    <h4>CostItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemType)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="刪除" class="btn btn-default" /> |
+            @Html.ActionLink(string.Format("返回{0}成本項目清單", Model.Product.Name), "ProductCostItems", new { ProductId = Model.Product.Id })
+        </div>
+    }
+</div>
