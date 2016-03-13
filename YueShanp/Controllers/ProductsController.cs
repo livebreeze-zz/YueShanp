@@ -84,11 +84,8 @@ namespace YueShanp.Controllers
             if (ModelState.IsValid)
             {
                 product.Customer = this.customerRepository.Get(product.Customer.Id);
-                product.Creator = User.Identity.GetUserName();
-                product.CreateTime = DateTime.Now;
-                product.LastEditor = User.Identity.GetUserName();
-                product.LastEditTime = DateTime.Now;
-                product.EntityStatus = EntityStatus.Enabled;
+
+                EntityHelper<Product>.CreateBaseEntity(product, User.Identity.Name);
 
                 this.productRepository.CreateProductQuoted(product);
                 return RedirectToAction("ProductsMaster", new { CustomerId = product.Customer.Id });
@@ -125,10 +122,7 @@ namespace YueShanp.Controllers
         {
             if (ModelState.IsValid)
             {
-                product.LastEditor = User.Identity.GetUserName();
-                product.LastEditTime = DateTime.Now;
-                product.EntityStatus = EntityStatus.Enabled;
-
+                EntityHelper<Product>.EditBaseEntity(product, User.Identity.Name);
                 this.productRepository.Update(product);
                 return RedirectToAction("ProductsMaster");
             }
@@ -160,10 +154,7 @@ namespace YueShanp.Controllers
         {
             Product product = this.productRepository.Get(id);
 
-            product.LastEditor = User.Identity.GetUserName();
-            product.LastEditTime = DateTime.Now;
-            product.EntityStatus = EntityStatus.Deleted;
-
+            EntityHelper<Product>.EditBaseEntity(product, User.Identity.Name, EntityStatus.Deleted);
             this.productRepository.Update(product);
             //this.ProductRepository.Delete(product);
 
@@ -208,18 +199,14 @@ namespace YueShanp.Controllers
         {
             if (ModelState.IsValid)
             {
-                costItem.Creator = User.Identity.Name;
-                costItem.CreateTime = DateTime.Now;
-                costItem.LastEditor = User.Identity.Name;
-                costItem.LastEditTime = DateTime.Now;
-                costItem.EntityStatus = EntityStatus.Enabled;
-
+                EntityHelper<CostItem>.CreateBaseEntity(costItem, User.Identity.Name);
                 this.costItemRepository.CreateProductCostItem(costItem);
+
                 return RedirectToAction("ProductCostItems", new { ProductId = costItem.Product.Id });
             }
 
             return View(costItem);
-        }
+        }        
 
         public ActionResult ProductCostEdit()
         {

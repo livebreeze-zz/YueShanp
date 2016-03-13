@@ -63,11 +63,7 @@ namespace YueShanp.Controllers
         {
             if (ModelState.IsValid)
             {
-                customer.Creator = "admin";
-                customer.CreateTime = DateTime.Now;
-                customer.LastEditor = "admin";
-                customer.LastEditTime = DateTime.Now;
-
+                EntityHelper<Customer>.CreateBaseEntity(customer, User.Identity.Name);
                 this.customerRepository.Create(customer);
                 return RedirectToAction("Index");
             }
@@ -101,10 +97,9 @@ namespace YueShanp.Controllers
         {
             if (ModelState.IsValid)
             {
-                customer.LastEditor = "admin";
-                customer.LastEditTime = DateTime.Now;
-
+                EntityHelper<Customer>.EditBaseEntity(customer, User.Identity.Name);
                 this.customerRepository.Update(customer);
+
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -133,11 +128,8 @@ namespace YueShanp.Controllers
         {
             Customer customer = this.customerRepository.Get(id);
 
-            customer.LastEditor = "admin";
-            customer.LastEditTime = DateTime.Now;
-            customer.EntityStatus = EntityStatus.Deleted;
+            EntityHelper<Customer>.EditBaseEntity(customer, User.Identity.Name, EntityStatus.Deleted);
             this.customerRepository.Update(customer);
-
             //this.customerRepository.Delete(customer);
 
             return RedirectToAction("Index");
