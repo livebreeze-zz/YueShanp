@@ -34,8 +34,8 @@ namespace YueShanp.Controllers
             var viewModel = new ProductsMasterViewModel()
             {
                 Customer = this.CustomerRepository.Get((int)customerId),
-                Products = this.ProductRepository.GetAll().Where(w => 
-                                                        w.Customer.Id == (int)customerId 
+                Products = this.ProductRepository.GetAll().Where(w =>
+                                                        w.Customer.Id == (int)customerId
                                                         && w.EntityStatus == EntityStatus.Enabled).ToList()
             };
 
@@ -166,6 +166,43 @@ namespace YueShanp.Controllers
             //this.ProductRepository.Delete(product);
 
             return RedirectToAction("ProductsMaster", new { CustomerId = product.Customer.Id });
+        }
+
+        public ActionResult ProductCost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var product = this.ProductRepository.Get((int)id);
+            var customer = this.CustomerRepository.Get(product.Customer.Id);
+
+            return View(new ProductCostViewModel()
+            {
+                Product = product,
+                Customer = customer
+            });
+        }
+
+        public ActionResult ProductCostCreate()
+        {
+            return View();
+        }
+
+        public ActionResult ProductCostEdit()
+        {
+            return View();
+        }
+
+        public ActionResult ProductCostDetails()
+        {
+            return View();
+        }        
+
+        public ActionResult ProductCostDelete()
+        {
+            return View();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace YueShanp.Models
 {
-    public class Item : BaseEntity<int>
+    public class CostItem : BaseEntity<int>
     {
         [Required]
         [DisplayName("名稱")]
@@ -12,6 +12,10 @@ namespace YueShanp.Models
         [Required]
         [DisplayName("單價")]
         public decimal UnitPrice { get; set; }
+
+        [Required]
+        [DisplayName("項目數量")]
+        public int ItemQty { get; set; }
 
         [Required]
         [DisplayName("種類")]

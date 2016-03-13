@@ -1,0 +1,55 @@
+﻿@using YueShanp.Models;
+@model ProductCostViewModel
+
+@{
+    ViewBag.Title = "產品成本";
+}
+
+<h2>@Model.Product.Name</h2>
+
+<p>
+    @Html.ActionLink("新增項目", "ProductCostCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayFor(model => model.Product.CostItems.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayFor(model => model.Product.CostItems.FirstOrDefault().UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayFor(model => model.Product.CostItems.FirstOrDefault().ItemType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.CostItems.FirstOrDefault().ItemQty)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Product.CostItems)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemQty)
+            </td>
+
+            <td>
+                @Html.ActionLink("編輯", "ProductCostEdit", new { id = item.Id }) |
+                @Html.ActionLink("詳細", "ProductCostDetails", new { id = item.Id }) |
+                @Html.ActionLink("刪除", "ProductCostDelete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

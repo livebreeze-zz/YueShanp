@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace YueShanp.Models
@@ -17,6 +18,6 @@ namespace YueShanp.Models
         public string Note { get; set; }
 
         public virtual Customer Customer { get; set; }
-        public virtual ProductCost ProductCost { get; set; }
+        public virtual List<CostItem> CostItems { get; set; }
     }
 }
