@@ -207,8 +207,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseEntity.cs" />
-    <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\ProductCost.cs" />
+    <Compile Include="Models\Interface\ICostItemRepository.cs" />
+    <Compile Include="Models\CostItem.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Enum\EntityStatus.cs" />
     <Compile Include="Models\Enum\ItemType.cs" />
@@ -219,6 +219,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Products\ProductCostViewModel.cs" />
     <Compile Include="Models\Products\ProductsMasterViewModel.cs" />
+    <Compile Include="Models\Repository\CostItemRepository.cs" />
     <Compile Include="Models\YueShanpContext.cs" />
     <Compile Include="Models\Repository\CustomerRepository.cs" />
     <Compile Include="Models\Repository\ProductRepository.cs" />
@@ -298,7 +299,8 @@
     <Content Include="Views\Products\ProductDetail.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\ProductsMaster.cshtml" />
-    <Content Include="Views\Products\ProductCost.cshtml" />
+    <Content Include="Views\Products\ProductCostItems.cshtml" />
+    <Content Include="Views\Products\ProductCostItemCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

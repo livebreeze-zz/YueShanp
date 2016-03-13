@@ -23,7 +23,6 @@ namespace YueShanp.Models
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
-
-        public System.Data.Entity.DbSet<YueShanp.Models.ProductCost> ProductCosts { get; set; }
+        public DbSet<CostItem> CostItems { get; set; }
     }
 }

@@ -7,8 +7,6 @@ namespace YueShanp.Models
 {
     public class ProductRepository : IProductRepository, IDisposable
     {
-        private const string ARGUMENTNULLEXCEPTIONPARAM = "instance";
-
         protected YueShanpContext db
         {
             get;
@@ -24,7 +22,7 @@ namespace YueShanp.Models
         {
             if (instance == null)
             {
-                throw new ArgumentNullException(ARGUMENTNULLEXCEPTIONPARAM);
+                throw new ArgumentNullException("Product");
             }
             else
             {
@@ -34,13 +32,13 @@ namespace YueShanp.Models
                 db.Entry(instance.Customer).State = EntityState.Unchanged;
                 this.SaveChanges();
             }
-        }
+        }        
 
         public void Update(Product instance)
         {
             if (instance == null)
             {
-                throw new ArgumentNullException(ARGUMENTNULLEXCEPTIONPARAM);
+                throw new ArgumentNullException("Product");
             }
             else
             {
@@ -54,7 +52,7 @@ namespace YueShanp.Models
         {
             if (instance == null)
             {
-                throw new ArgumentNullException(ARGUMENTNULLEXCEPTIONPARAM);
+                throw new ArgumentNullException("Product");
             }
             else
             {
@@ -94,6 +92,6 @@ namespace YueShanp.Models
                     this.db = null;
                 }
             }
-        }
+        }        
     }
 }

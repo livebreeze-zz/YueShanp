@@ -12,13 +12,15 @@ namespace YueShanp.Controllers
     [Authorize]
     public class ProductsController : Controller
     {
-        private ICustomerRepository CustomerRepository;
-        private IProductRepository ProductRepository;
+        private ICustomerRepository customerRepository;
+        private IProductRepository productRepository;
+        private ICostItemRepository costItemRepository;
 
         public ProductsController()
         {
-            this.CustomerRepository = new CustomerRepository();
-            this.ProductRepository = new ProductRepository();
+            this.customerRepository = new CustomerRepository();
+            this.productRepository = new ProductRepository();
+            this.costItemRepository = new CostItemRepository();
         }
 
         // GET: ProductsMaster
@@ -33,8 +35,8 @@ namespace YueShanp.Controllers
 
             var viewModel = new ProductsMasterViewModel()
             {
-                Customer = this.CustomerRepository.Get((int)customerId),
-                Products = this.ProductRepository.GetAll().Where(w =>
+                Customer = this.customerRepository.Get((int)customerId),
+                Products = this.productRepository.GetAll().Where(w =>
                                                         w.Customer.Id == (int)customerId
                                                         && w.EntityStatus == EntityStatus.Enabled).ToList()
             };
@@ -51,7 +53,7 @@ namespace YueShanp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Product product = this.ProductRepository.Get((int)id);
+            Product product = this.productRepository.Get((int)id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -63,7 +65,7 @@ namespace YueShanp.Controllers
         // GET: Products/Create
         public ActionResult Create(int customerId)
         {
-            var customer = this.CustomerRepository.Get(customerId);
+            var customer = this.customerRepository.Get(customerId);
             var product = new Product()
             {
                 Customer = customer
@@ -81,14 +83,14 @@ namespace YueShanp.Controllers
         {
             if (ModelState.IsValid)
             {
-                product.Customer = this.CustomerRepository.Get(product.Customer.Id);
+                product.Customer = this.customerRepository.Get(product.Customer.Id);
                 product.Creator = User.Identity.GetUserName();
                 product.CreateTime = DateTime.Now;
                 product.LastEditor = User.Identity.GetUserName();
                 product.LastEditTime = DateTime.Now;
                 product.EntityStatus = EntityStatus.Enabled;
 
-                this.ProductRepository.CreateProductQuoted(product);
+                this.productRepository.CreateProductQuoted(product);
                 return RedirectToAction("ProductsMaster", new { CustomerId = product.Customer.Id });
             }
             else
@@ -105,7 +107,7 @@ namespace YueShanp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Product product = this.ProductRepository.Get((int)id);
+            Product product = this.productRepository.Get((int)id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -127,7 +129,7 @@ namespace YueShanp.Controllers
                 product.LastEditTime = DateTime.Now;
                 product.EntityStatus = EntityStatus.Enabled;
 
-                this.ProductRepository.Update(product);
+                this.productRepository.Update(product);
                 return RedirectToAction("ProductsMaster");
             }
 
@@ -142,7 +144,7 @@ namespace YueShanp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Product product = this.ProductRepository.Get((int)id);
+            Product product = this.productRepository.Get((int)id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -156,27 +158,27 @@ namespace YueShanp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = this.ProductRepository.Get(id);
+            Product product = this.productRepository.Get(id);
 
             product.LastEditor = User.Identity.GetUserName();
             product.LastEditTime = DateTime.Now;
             product.EntityStatus = EntityStatus.Deleted;
 
-            this.ProductRepository.Update(product);
+            this.productRepository.Update(product);
             //this.ProductRepository.Delete(product);
 
             return RedirectToAction("ProductsMaster", new { CustomerId = product.Customer.Id });
         }
 
-        public ActionResult ProductCost(int? id)
+        public ActionResult ProductCostItems(int? productId)
         {
-            if (id == null)
+            if (productId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var product = this.ProductRepository.Get((int)id);
-            var customer = this.CustomerRepository.Get(product.Customer.Id);
+            var product = this.productRepository.Get((int)productId);
+            var customer = this.customerRepository.Get(product.Customer.Id);
 
             return View(new ProductCostViewModel()
             {
@@ -185,9 +187,38 @@ namespace YueShanp.Controllers
             });
         }
 
-        public ActionResult ProductCostCreate()
+        public ActionResult ProductCostItemCreate(int? productId)
         {
-            return View();
+            if (productId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var costItem = new CostItem()
+            {
+                Product = this.productRepository.Get((int)productId)
+            };
+
+            return View(costItem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProductCostItemCreate([Bind(Include = "Name,UnitPrice,ItemQty,ItemType,Product")]CostItem costItem)
+        {
+            if (ModelState.IsValid)
+            {
+                costItem.Creator = User.Identity.Name;
+                costItem.CreateTime = DateTime.Now;
+                costItem.LastEditor = User.Identity.Name;
+                costItem.LastEditTime = DateTime.Now;
+                costItem.EntityStatus = EntityStatus.Enabled;
+
+                this.costItemRepository.CreateProductCostItem(costItem);
+                return RedirectToAction("ProductCostItems", new { ProductId = costItem.Product.Id });
+            }
+
+            return View(costItem);
         }
 
         public ActionResult ProductCostEdit()
@@ -198,7 +229,7 @@ namespace YueShanp.Controllers
         public ActionResult ProductCostDetails()
         {
             return View();
-        }        
+        }
 
         public ActionResult ProductCostDelete()
         {

@@ -20,5 +20,7 @@ namespace YueShanp.Models
         [Required]
         [DisplayName("種類")]
         public ItemType ItemType { get; set; }
+
+        public virtual Product Product { get; set; }
     }
 }
