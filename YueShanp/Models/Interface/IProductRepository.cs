@@ -10,9 +10,9 @@ namespace YueShanp.Models.Interface
 
         void Delete(Product instance);
 
-        Product Get(int QuotedId);
+        Product Get(int ProductId);
 
-        IQueryable<Product> GetAll();
+        IQueryable<Product> GetAll(int CustomerId);
 
         void SaveChanges();
     }

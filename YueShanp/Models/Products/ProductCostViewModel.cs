@@ -7,7 +7,8 @@ namespace YueShanp.Models
 {
     public class ProductCostViewModel
     {
-        public Product Product { get; set; }
-        public Customer Customer { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public IEnumerable<CostItem> CostItems { get; set; }
     }
 }

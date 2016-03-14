@@ -4,11 +4,11 @@
     ViewBag.Title = "成本項目刪除";
 }
 
-<h2>@Model.Product.Name</h2>
+<h2>@Model.Product.Customer.Name - @Model.Product.Name</h2>
 
 <h3>確定要刪除 @Model.Name ?</h3>
 <div>
-    <h4>CostItem</h4>
+    @*<h4>CostItem</h4>*@
     <hr />
     <dl class="dl-horizontal">
         <dt>

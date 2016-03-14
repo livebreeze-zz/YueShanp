@@ -8,18 +8,19 @@
 <h2>@Model.Product.Name</h2>
 
 <p>
-    @Html.ActionLink("新增項目", "ProductCostCreate")
+
+    @Html.ActionLink("新增項目", "ProductCostItemCreate", new { ProductId = Model.Product.Id })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayFor(model => model.Product.CostItems.FirstOrDefault().Name)
+            @Html.DisplayNameFor(model => model.Product.CostItems.FirstOrDefault().Name)
         </th>
         <th>
-            @Html.DisplayFor(model => model.Product.CostItems.FirstOrDefault().UnitPrice)
+            @Html.DisplayNameFor(model => model.Product.CostItems.FirstOrDefault().UnitPrice)
         </th>
         <th>
-            @Html.DisplayFor(model => model.Product.CostItems.FirstOrDefault().ItemType)
+            @Html.DisplayNameFor(model => model.Product.CostItems.FirstOrDefault().ItemType)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Product.CostItems.FirstOrDefault().ItemQty)
@@ -45,9 +46,8 @@
             </td>
 
             <td>
-                @Html.ActionLink("編輯", "ProductCostEdit", new { id = item.Id }) |
-                @Html.ActionLink("詳細", "ProductCostDetails", new { id = item.Id }) |
-                @Html.ActionLink("刪除", "ProductCostDelete", new { id = item.Id })
+                @Html.ActionLink("編輯", "ProductCostItemEdit", new { CostItemId = item.Id }) |
+                @Html.ActionLink("刪除", "ProductCostItemDelete", new { CostItemId = item.Id })
             </td>
         </tr>
     }

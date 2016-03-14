@@ -42,7 +42,7 @@ namespace YueShanp.Models
             }
             else
             {
-                db.Entry(instance.Customer).State = EntityState.Unchanged;
+                //db.Entry(instance.Customer).State = EntityState.Unchanged;
                 db.Entry(instance).State = EntityState.Modified;
                 this.SaveChanges();
             }
@@ -63,12 +63,12 @@ namespace YueShanp.Models
 
         public Product Get(int ProductId)
         {
-            return db.Products.FirstOrDefault(x => x.Id == ProductId);
+            return db.Products.Find(ProductId);
         }
 
-        public IQueryable<Product> GetAll()
+        public IQueryable<Product> GetAll(int customerId)
         {
-            return db.Products.OrderByDescending(x => x.Id);
+            return db.Products.Where(w => w.Customer.Id == customerId && w.EntityStatus == EntityStatus.Enabled).OrderByDescending(x => x.Id);
         }
 
         public void SaveChanges()

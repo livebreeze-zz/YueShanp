@@ -10,7 +10,9 @@ namespace YueShanp.Models.Interface
     {
         void CreateProductCostItem(CostItem instance);
 
-        CostItem Get(int CostItemId);
+        CostItem Get(int costItemId);
+
+        IQueryable<CostItem> GetAll(int productId);
 
         void Update(CostItem instance);
 

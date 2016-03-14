@@ -126,7 +126,11 @@ namespace YueShanp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = this.customerRepository.Get(id);
+            var customer = this.customerRepository.Get(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
 
             EntityHelper<Customer>.EditBaseEntity(customer, User.Identity.Name, EntityStatus.Deleted);
             this.customerRepository.Update(customer);

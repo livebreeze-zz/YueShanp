@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 
 using YueShanp.Models;
 using YueShanp.Models.Interface;
@@ -33,12 +31,16 @@ namespace YueShanp.Controllers
                 //return RedirectToAction("Index", "Customers");
             }
 
+            var customer = this.customerRepository.Get((int)customerId);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
             var viewModel = new ProductsMasterViewModel()
             {
-                Customer = this.customerRepository.Get((int)customerId),
-                Products = this.productRepository.GetAll().Where(w =>
-                                                        w.Customer.Id == (int)customerId
-                                                        && w.EntityStatus == EntityStatus.Enabled).ToList()
+                Customer = customer,
+                Products = this.productRepository.GetAll((int)customerId)
             };
 
             return View(viewModel);
@@ -118,13 +120,13 @@ namespace YueShanp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,QuotedPrice,Note")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Name,QuotedPrice,Note,Creator,CreateTime,Customer")] Product product)
         {
             if (ModelState.IsValid)
             {
                 EntityHelper<Product>.EditBaseEntity(product, User.Identity.Name);
                 this.productRepository.Update(product);
-                return RedirectToAction("ProductsMaster");
+                return RedirectToAction("ProductsMaster", new { CustomerId = product.Customer.Id });
             }
 
             return View(product);
@@ -138,7 +140,7 @@ namespace YueShanp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Product product = this.productRepository.Get((int)id);
+            var product = this.productRepository.Get((int)id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -152,7 +154,11 @@ namespace YueShanp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = this.productRepository.Get(id);
+            var product = this.productRepository.Get(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
 
             EntityHelper<Product>.EditBaseEntity(product, User.Identity.Name, EntityStatus.Deleted);
             this.productRepository.Update(product);
@@ -170,12 +176,18 @@ namespace YueShanp.Controllers
             }
 
             var product = this.productRepository.Get((int)productId);
-            var customer = this.customerRepository.Get(product.Customer.Id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            var costItems = this.costItemRepository.GetAll((int)productId);
 
             return View(new ProductCostViewModel()
             {
-                Product = product,
-                Customer = customer
+                ProductId = (int)productId,                
+                ProductName = product.Name,
+                CostItems = costItems
             });
         }
 
@@ -191,16 +203,22 @@ namespace YueShanp.Controllers
                 Product = this.productRepository.Get((int)productId)
             };
 
+            if (costItem.Product == null)
+            {
+                return HttpNotFound();
+            }
+
             return View(costItem);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ProductCostItemCreate([Bind(Include = "Name,UnitPrice,ItemQty,ItemType,Product")]CostItem costItem)
+        public ActionResult ProductCostItemCreate([Bind(Include = "Name,UnitPrice,ItemQty,Product")]CostItem costItem)
         {
             if (ModelState.IsValid)
             {
                 EntityHelper<CostItem>.CreateBaseEntity(costItem, User.Identity.Name);
+                costItem.ItemType = ItemType.Normal;
                 this.costItemRepository.CreateProductCostItem(costItem);
 
                 return RedirectToAction("ProductCostItems", new { ProductId = costItem.Product.Id });
@@ -223,7 +241,7 @@ namespace YueShanp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ProductCostItemEdit([Bind(Include ="Name,UnitPrice,ItemQty,ItemType,Product")]CostItem costItem)
+        public ActionResult ProductCostItemEdit([Bind(Include = "Name,UnitPrice,ItemQty,ItemType,Product,Creator,CreateTime")]CostItem costItem)
         {
             if (ModelState.IsValid)
             {
@@ -249,10 +267,10 @@ namespace YueShanp.Controllers
                 return HttpNotFound();
             }
 
-            return View();
+            return View(costItem);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("ProductCostItemDelete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteCostItemConfirmed(int costItemId)
         {

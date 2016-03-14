@@ -41,9 +41,15 @@
             </div>
         </div>
 
+        @Html.HiddenFor(model => model.Creator)
+        @Html.HiddenFor(model => model.CreateTime)
+        @Html.HiddenFor(model => model.Customer.Id)
+        @Html.HiddenFor(model => model.Customer.Name)
+        @Html.HiddenFor(model => model.Customer.Phone)
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="儲存" class="btn btn-default" />
             </div>
         </div>
     </div>

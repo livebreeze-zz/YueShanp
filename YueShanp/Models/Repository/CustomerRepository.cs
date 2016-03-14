@@ -7,7 +7,7 @@ namespace YueShanp.Models
 {
     public class CustomerRepository : ICustomerRepository, IDisposable
     {
-        private const string ARGUMENTNULLEXCEPTIONPARAM = "instance";
+        private const string ARGUMENTNULLEXCEPTIONPARAM = "Customer";
 
         protected YueShanpContext db
         {
