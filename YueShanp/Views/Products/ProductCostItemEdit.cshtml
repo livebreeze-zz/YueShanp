@@ -42,9 +42,13 @@
         </div>
 
         @Html.HiddenFor(model => model.ItemType)
-
         @Html.HiddenFor(model => model.Creator)
         @Html.HiddenFor(model => model.CreateTime)
+
+        @Html.HiddenFor(model => model.Product.Id)
+        @Html.HiddenFor(model => model.Product.Name)
+        @Html.HiddenFor(model => model.Product.QuotedPrice)
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

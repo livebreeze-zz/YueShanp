@@ -241,7 +241,7 @@ namespace YueShanp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ProductCostItemEdit([Bind(Include = "Name,UnitPrice,ItemQty,ItemType,Product,Creator,CreateTime")]CostItem costItem)
+        public ActionResult ProductCostItemEdit([Bind(Include = "Id,Name,UnitPrice,ItemQty,ItemType,Product,Creator,CreateTime")]CostItem costItem)
         {
             if (ModelState.IsValid)
             {

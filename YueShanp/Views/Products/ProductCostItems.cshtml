@@ -5,31 +5,31 @@
     ViewBag.Title = "產品成本";
 }
 
-<h2>@Model.Product.Name</h2>
+<h2>@Model.ProductName</h2>
 
 <p>
 
-    @Html.ActionLink("新增項目", "ProductCostItemCreate", new { ProductId = Model.Product.Id })
+    @Html.ActionLink("新增項目", "ProductCostItemCreate", new { ProductId = Model.ProductId })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Product.CostItems.FirstOrDefault().Name)
+            @Html.DisplayNameFor(model => model.CostItems.FirstOrDefault().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.CostItems.FirstOrDefault().UnitPrice)
+            @Html.DisplayNameFor(model => model.CostItems.FirstOrDefault().UnitPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.CostItems.FirstOrDefault().ItemType)
+            @Html.DisplayNameFor(model => model.CostItems.FirstOrDefault().ItemType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.CostItems.FirstOrDefault().ItemQty)
+            @Html.DisplayNameFor(model => model.CostItems.FirstOrDefault().ItemQty)
         </th>
 
         <th></th>
     </tr>
 
-    @foreach (var item in Model.Product.CostItems)
+    @foreach (var item in Model.CostItems)
     {
         <tr>
             <td>
