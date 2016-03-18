@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>QuotedPrinter</title>
+    <link href="~/Content/Products/QuotedPrint.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        @*TODO 設計列印 table *@
+
+        <h1>裕上企業有限公司</h1>
+        <h2>報價單</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="customer">
+                    <label>客戶名稱:</label>
+                    <label id="lbl_customerName">{{徠通科技公司}}</label>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="reqDate">
+                    <label>日期:</label>
+                    <label>104年11月04日</label>
+                </div>
+            </div>
+        </div>
+        <!-- /.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="Purchaser">
+                    <label>聯絡人:</label>
+                    <label>採購-賴小姐</label>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        報價如下:
+        <div class="row">
+            <table>
+                <thead>
+                    <tr>
+                        <th>品項</th>
+                        <th>品名/規格/型號</th>
+                        <th>數量</th>
+                        <th>單位</th>
+                        <th>單價</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* repeat data here *@
+                    <tr>
+                        <td>1</td>
+                        <td>GAUW017G008</td>
+                        <td>1</td>
+                        <td>PCS</td>
+                        <td>$82.0</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        總合計: $6,487.0
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

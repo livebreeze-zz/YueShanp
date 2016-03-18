@@ -231,6 +231,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Fonts\notosanstc.css" />
+    <Content Include="Content\Products\QuotedPrint.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -242,6 +243,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\YueShanp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -304,6 +306,7 @@
     <Content Include="Views\Products\ProductCostItemCreate.cshtml" />
     <Content Include="Views\Products\ProductCostItemEdit.cshtml" />
     <Content Include="Views\Products\ProductCostItemDelete.cshtml" />
+    <Content Include="Views\Products\QuotedPrinter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

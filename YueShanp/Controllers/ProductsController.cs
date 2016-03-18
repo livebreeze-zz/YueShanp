@@ -21,6 +21,7 @@ namespace YueShanp.Controllers
             this.costItemRepository = new CostItemRepository();
         }
 
+        #region Product master
         // GET: ProductsMaster
         [AllowAnonymous]
         public ActionResult ProductsMaster(int? customerId)
@@ -167,6 +168,8 @@ namespace YueShanp.Controllers
             return RedirectToAction("ProductsMaster", new { CustomerId = product.Customer.Id });
         }
 
+        #endregion
+
         #region Product cost item
         public ActionResult ProductCostItems(int? productId)
         {
@@ -280,6 +283,13 @@ namespace YueShanp.Controllers
             this.costItemRepository.Update(costItem);
 
             return RedirectToAction("ProductCostItems", new { ProductId = costItem.Product.Id });
+        }
+        #endregion
+
+        #region print
+        public ActionResult QuotedPrinter()
+        {
+            return View();
         }
         #endregion
     }
