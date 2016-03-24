@@ -3,3 +3,93 @@
         display: none;
     }
 }
+
+h1, h2 {
+    text-align: center;
+}
+
+.row {
+    margin: 10px;
+    margin-left: 5%;
+    width: 90%;
+    clear: both;
+}
+
+    .row:before,
+    .row:after {
+        display: table;
+        content: " ";
+    }
+
+    .row:after {
+        clear: both;
+    }
+
+.title {
+    margin: 10px;
+    padding: 5px;
+    position: absolute;
+    display: inline-block;
+}
+
+.title-left {
+}
+
+.title-right {
+    text-align: right;
+    padding-left: 70%;
+    /*margin-left:50%;*/
+    /*width:100%;*/
+    position: relative;
+}
+
+.customer {
+    font-size: larger;
+}
+
+.reqDate {
+    text-align: right;
+}
+
+/*table*/
+table {
+    width: 100%;
+    margin: 10px;
+    padding: 5px;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: center;
+    border: 1px solid;
+}
+
+.col_number {
+    width: 50px;
+}
+
+.product {
+    width: 300px;
+}
+
+.qty {
+    width: 50px;
+}
+
+.unit {
+    width: 50px;
+}
+
+.unitprice {
+    width: 70px;
+}
+
+.note {
+    width: 300px;
+}
+
+td.total {
+    border:none;
+    text-align: right;
+    width: 780px;
+}
