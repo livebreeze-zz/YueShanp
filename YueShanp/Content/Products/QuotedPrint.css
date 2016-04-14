@@ -25,6 +25,7 @@ h1, h2 {
         clear: both;
     }
 
+/* TITLE */
 .title {
     margin: 10px;
     padding: 5px;
@@ -43,6 +44,7 @@ h1, h2 {
     position: relative;
 }
 
+/* CUSTOMER */
 .customer {
     font-size: larger;
 }
@@ -51,7 +53,7 @@ h1, h2 {
     text-align: right;
 }
 
-/*table*/
+/* QUOTED TABLE */
 table {
     width: 100%;
     margin: 10px;
