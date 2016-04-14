@@ -307,6 +307,7 @@
     <Content Include="Views\Products\ProductCostItemEdit.cshtml" />
     <Content Include="Views\Products\ProductCostItemDelete.cshtml" />
     <Content Include="Views\Products\QuotedPrinter.cshtml" />
+    <Content Include="Views\Products\PrintProductLabel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
