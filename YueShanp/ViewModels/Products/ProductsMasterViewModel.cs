@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using YueShanp.Models;
 
-namespace YueShanp.Models
+namespace YueShanp.ViewModels
 {
     public class ProductsMasterViewModel
     {

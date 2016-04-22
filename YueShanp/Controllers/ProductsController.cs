@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 using YueShanp.Models;
 using YueShanp.Models.Interface;
+using YueShanp.ViewModels;
 
 namespace YueShanp.Controllers
 {

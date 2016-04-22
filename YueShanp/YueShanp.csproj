@@ -218,8 +218,8 @@
     <Compile Include="Models\Interface\IProductRepository.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Products\ProductCostViewModel.cs" />
-    <Compile Include="Models\Products\ProductsMasterViewModel.cs" />
+    <Compile Include="ViewModels\Products\ProductCostViewModel.cs" />
+    <Compile Include="ViewModels\Products\ProductsMasterViewModel.cs" />
     <Compile Include="Models\Repository\CostItemRepository.cs" />
     <Compile Include="Models\YueShanpContext.cs" />
     <Compile Include="Models\Repository\CustomerRepository.cs" />
