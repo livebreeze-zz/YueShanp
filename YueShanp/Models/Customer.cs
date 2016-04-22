@@ -9,6 +9,9 @@ namespace YueShanp.Models
         [DisplayName("公司名稱")]
         public string Name { get; set; }
 
+        [DisplayName("公司全名")]
+        public string FullName { get; set; }
+
         [Required]
         [DisplayName("聯絡電話")]
         [UIHint("PhoneNumber")]
@@ -26,5 +29,8 @@ namespace YueShanp.Models
 
         [DisplayName("採購姓名")]
         public string Purchaser { get; set; }
+
+        [DisplayName("統一編號")]
+        public string TIN { get; set; }
     }
 }
