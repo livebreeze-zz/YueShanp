@@ -207,6 +207,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\DeliveryOrder.cs" />
+    <Compile Include="Models\DeliveryOrderDetail.cs" />
     <Compile Include="Models\EntityHelper.cs" />
     <Compile Include="Models\Interface\ICostItemRepository.cs" />
     <Compile Include="Models\CostItem.cs" />
