@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using YueShanp.Models;
 using YueShanp.Models.Interface;
@@ -13,24 +7,24 @@ using YueShanp.Models.Interface;
 namespace YueShanp.Controllers
 {
     [Authorize]
-    public class CustomersController : Controller
+    public class CustomerController : Controller
     {
         private ICustomerRepository customerRepository;
 
-        public CustomersController()
+        public CustomerController()
         {
             this.customerRepository = new CustomerRepository();
         }
 
         // GET: Customers
         [AllowAnonymous]
-        public ActionResult Index()
+        public ActionResult CustomerIndex()
         {
             var customers = this.customerRepository.GetAll();
             return View(customers.ToList());
         }
 
-        // GET: Customers/Details/5
+        // GET: Customer/Details/5
         [AllowAnonymous]
         public ActionResult Details(int? id)
         {
@@ -48,13 +42,13 @@ namespace YueShanp.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Create
+        // GET: Customer/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Customer/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -71,7 +65,7 @@ namespace YueShanp.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Edit/5
+        // GET: Customer/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,7 +82,7 @@ namespace YueShanp.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Customer/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -105,7 +99,7 @@ namespace YueShanp.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Customer/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -121,7 +115,7 @@ namespace YueShanp.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

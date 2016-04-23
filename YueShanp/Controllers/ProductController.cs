@@ -10,18 +10,20 @@ using YueShanp.Models.Interface;
 namespace YueShanp.Controllers
 {
     [Authorize]
-    public class ProductsController : Controller
+    public class ProductController : Controller
     {
+        #region private fileds and constructor
         private ICustomerRepository customerRepository;
         private IProductRepository productRepository;
         private ICostItemRepository costItemRepository;
 
-        public ProductsController()
+        public ProductController()
         {
             this.customerRepository = new CustomerRepository();
             this.productRepository = new ProductRepository();
             this.costItemRepository = new CostItemRepository();
         }
+        #endregion       
 
         #region Product master
         // GET: ProductsMaster
@@ -31,7 +33,7 @@ namespace YueShanp.Controllers
             if (customerId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                //return RedirectToAction("Index", "Customers");
+                //return RedirectToAction("Index", "Customer");
             }
 
             var customer = this.customerRepository.Get((int)customerId);
@@ -49,7 +51,7 @@ namespace YueShanp.Controllers
             return View(viewModel);
         }
 
-        // GET: Products/Details/5
+        // GET: Product/Details/5
         [AllowAnonymous]
         public ActionResult ProductDetail(int? id)
         {
@@ -67,7 +69,7 @@ namespace YueShanp.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
+        // GET: Product/Create
         public ActionResult Create(int customerId)
         {
             var customer = this.customerRepository.Get(customerId);
@@ -79,7 +81,7 @@ namespace YueShanp.Controllers
             return View(product);
         }
 
-        // POST: Products/Create
+        // POST: Product/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -101,7 +103,7 @@ namespace YueShanp.Controllers
             }
         }
 
-        // GET: Products/Edit/5
+        // GET: Product/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -118,7 +120,7 @@ namespace YueShanp.Controllers
             return View(product);
         }
 
-        // POST: Products/Edit/5
+        // POST: Product/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -135,7 +137,7 @@ namespace YueShanp.Controllers
             return View(product);
         }
 
-        // GET: Products/Delete/5
+        // GET: Product/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -152,7 +154,7 @@ namespace YueShanp.Controllers
             return View(product);
         }
 
-        // POST: Products/Delete/5
+        // POST: Product/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

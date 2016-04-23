@@ -198,11 +198,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DeliveryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,8 +223,8 @@
     <Compile Include="Models\ViewModels\Manage\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Repository\DeliveryRepository.cs" />
-    <Compile Include="Models\ViewModels\Products\ProductCostViewModel.cs" />
-    <Compile Include="Models\ViewModels\Products\ProductsMasterViewModel.cs" />
+    <Compile Include="Models\ViewModels\Product\ProductCostViewModel.cs" />
+    <Compile Include="Models\ViewModels\Product\ProductsMasterViewModel.cs" />
     <Compile Include="Models\Repository\CostItemRepository.cs" />
     <Compile Include="Models\YueShanpContext.cs" />
     <Compile Include="Models\Repository\CustomerRepository.cs" />
@@ -236,7 +236,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Fonts\notosanstc.css" />
-    <Content Include="Content\Products\QuotedPrint.css" />
+    <Content Include="Content\Product\QuotedPrint.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -297,23 +297,24 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Customers\Create.cshtml" />
-    <Content Include="Views\Customers\Delete.cshtml" />
-    <Content Include="Views\Customers\Details.cshtml" />
-    <Content Include="Views\Customers\Edit.cshtml" />
-    <Content Include="Views\Customers\Index.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
-    <Content Include="Views\Products\ProductDetail.cshtml" />
-    <Content Include="Views\Products\Edit.cshtml" />
-    <Content Include="Views\Products\ProductsMaster.cshtml" />
-    <Content Include="Views\Products\ProductCostItems.cshtml" />
-    <Content Include="Views\Products\ProductCostItemCreate.cshtml" />
-    <Content Include="Views\Products\ProductCostItemEdit.cshtml" />
-    <Content Include="Views\Products\ProductCostItemDelete.cshtml" />
-    <Content Include="Views\Products\QuotedPrinter.cshtml" />
-    <Content Include="Views\Products\PrintProductLabel.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\CustomerIndex.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\ProductsMaster.cshtml" />
+    <Content Include="Views\Product\ProductCostItems.cshtml" />
+    <Content Include="Views\Product\ProductCostItemCreate.cshtml" />
+    <Content Include="Views\Product\ProductCostItemEdit.cshtml" />
+    <Content Include="Views\Product\ProductCostItemDelete.cshtml" />
+    <Content Include="Views\Product\QuotedPrinter.cshtml" />
+    <Content Include="Views\Product\PrintProductLabel.cshtml" />
     <Content Include="Views\Delivery\DeliveryOrderList.cshtml" />
+    <Content Include="Views\Product\ProductIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
