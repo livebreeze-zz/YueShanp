@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\DeliveryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -312,6 +313,7 @@
     <Content Include="Views\Products\ProductCostItemDelete.cshtml" />
     <Content Include="Views\Products\QuotedPrinter.cshtml" />
     <Content Include="Views\Products\PrintProductLabel.cshtml" />
+    <Content Include="Views\Delivery\DeliveryOrderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

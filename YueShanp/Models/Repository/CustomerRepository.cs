@@ -66,7 +66,7 @@ namespace YueShanp.Models
 
         public IQueryable<Customer> GetAll()
         {
-            return this.db.Customers.OrderByDescending(x => x.Id);
+            return this.db.Customers.OrderByDescending(x => x.Id).Where(w => w.EntityStatus == EntityStatus.Enabled);
         }
 
         public void SaveChanges()

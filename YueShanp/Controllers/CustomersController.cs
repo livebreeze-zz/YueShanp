@@ -26,7 +26,7 @@ namespace YueShanp.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var customers = this.customerRepository.GetAll().Where(w => w.EntityStatus == EntityStatus.Enabled);
+            var customers = this.customerRepository.GetAll();
             return View(customers.ToList());
         }
 

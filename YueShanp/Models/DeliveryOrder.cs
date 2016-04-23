@@ -9,23 +9,23 @@ namespace YueShanp.Models
     {
         [Required]
         [DisplayName("出貨單編號")]
-        public int DONumber { get; set; }
+        public int DeliveryOrderNumber { get; set; }
 
         [DisplayName("客戶訂單編號")]
         public string CustomerSONumber { get; set; }
 
         [Required]
         [DisplayName("出貨日期")]
-        public DateTime DODate { get; set; }
+        public DateTime DeliveryOrderDate { get; set; }
 
         [Required]
         [StringLength(6)]
         [DisplayName("帳款月份")]
-        public int ReceivableMoth { get; set; }
+        public string ReceivableMonth { get; set; }
 
         public virtual Customer Customer { get; set; }
 
-        public virtual List<DeliveryOrderDetail> DODetailList { get; set; }
+        public virtual List<DeliveryOrderDetail> DeliveryOrderDetailList { get; set; }
 
     }
 }

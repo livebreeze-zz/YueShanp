@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using YueShanp.Models.Interface;
 
-namespace YueShanp.Models.Repository
+namespace YueShanp.Models
 {
     public class DeliveryRepository : IDeliveryRepository
     {
-         protected YueShanpContext db
+        protected YueShanpContext db
         {
             get;
             private set;
@@ -36,7 +36,7 @@ namespace YueShanp.Models.Repository
 
         public IQueryable<DeliveryOrder> GetAll(int CustomerId)
         {
-            throw new NotImplementedException();
+            return db.DeliveryOrders.OrderByDescending(o => o.Id).Where(w => w.EntityStatus == EntityStatus.Enabled);
         }
 
         public void SaveChanges()
