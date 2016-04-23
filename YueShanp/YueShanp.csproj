@@ -206,7 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Account\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModels\Account\AccountViewModels.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\DeliveryOrder.cs" />
     <Compile Include="Models\DeliveryOrderDetail.cs" />
@@ -220,11 +220,11 @@
     <Compile Include="Models\Interface\ICustomerRepository.cs" />
     <Compile Include="Models\Interface\IDeliveryRepository.cs" />
     <Compile Include="Models\Interface\IProductRepository.cs" />
-    <Compile Include="ViewModels\Manage\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\Manage\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Repository\DeliveryRepository.cs" />
-    <Compile Include="ViewModels\Products\ProductCostViewModel.cs" />
-    <Compile Include="ViewModels\Products\ProductsMasterViewModel.cs" />
+    <Compile Include="Models\ViewModels\Products\ProductCostViewModel.cs" />
+    <Compile Include="Models\ViewModels\Products\ProductsMasterViewModel.cs" />
     <Compile Include="Models\Repository\CostItemRepository.cs" />
     <Compile Include="Models\YueShanpContext.cs" />
     <Compile Include="Models\Repository\CustomerRepository.cs" />
@@ -317,7 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModels\Delivery\" />
+    <Folder Include="Models\ViewModels\Delivery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

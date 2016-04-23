@@ -1,13 +1,11 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
 using YueShanp.Models;
 using YueShanp.Models.Interface;
-using YueShanp.ViewModels;
 
 namespace YueShanp.Controllers
 {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using YueShanp.Models;
 
-namespace YueShanp.ViewModels
+namespace YueShanp.Models
 {
     public class ProductsMasterViewModel
     {
