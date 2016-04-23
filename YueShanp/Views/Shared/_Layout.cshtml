@@ -23,7 +23,9 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("首頁", "Index", "Home")</li>
                     <li>@Html.ActionLink("關於", "About", "Home")</li>
-                    <li>@Html.ActionLink("產品報價", "Index", "Customers")</li>
+                    <li>@Html.ActionLink("客戶管理", "CustomersIndex", "Customers")</li>
+                    <li>@Html.ActionLink("產品報價", "ProductsIndex", "Porducts")</li>
+                    <li>@Html.ActionLink("出貨單", "DeliveryIndex", "Delivery")</li>
                     <li>@Html.ActionLink("聯絡", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
