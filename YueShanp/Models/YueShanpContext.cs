@@ -24,5 +24,6 @@ namespace YueShanp.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<CostItem> CostItems { get; set; }
+        public DbSet<DeliveryOrder> DeliveryOrders { get; set; }
     }
 }

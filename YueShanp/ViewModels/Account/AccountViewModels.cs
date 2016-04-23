@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace YueShanp.Models
+namespace YueShanp.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {
