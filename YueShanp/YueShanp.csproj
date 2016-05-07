@@ -237,6 +237,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Delivery\DeliveryIndex.css">
+      <DependentUpon>DeliveryIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Delivery\DeliveryIndex.min.css">
+      <DependentUpon>DeliveryIndex.css</DependentUpon>
+    </Content>
     <Content Include="Content\Fonts\notosanstc.css" />
     <Content Include="Content\Product\QuotedPrint.css" />
     <Content Include="favicon.ico" />
@@ -250,6 +256,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Delivery\DeliveryIndex.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\YueShanp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -318,6 +329,7 @@
     <Content Include="Views\Delivery\DeliveryOrderList.cshtml" />
     <Content Include="Views\Product\ProductIndex.cshtml" />
     <Content Include="Views\Delivery\DeliveryIndex.cshtml" />
+    <Content Include="Views\Delivery\_AddDelivery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

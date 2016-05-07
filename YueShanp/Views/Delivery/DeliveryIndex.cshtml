@@ -3,9 +3,13 @@
     ViewBag.Title = "DeliveryIndex";
 }
 
+@section styles{
+    <link href="~/Content/Delivery/DeliveryIndex.min.css" rel="stylesheet" />
+}
+
 <h2>DeliveryIndex</h2>
 <div class="container">
-    <ul class="nav nav-tabs">
+    <ul id="deliveryIndextTab" class="nav nav-tabs">
         <li class="active"><a href="#queryDelivery">查詢</a></li>
         <li><a href="#addDelivery">新增</a></li>
         <li><a href="#monthDelivery">月結單</a></li>
@@ -16,7 +20,7 @@
             @QueryDelivery()
         </div>
         <div role="tabpanel" class="tab-pane" id="addDelivery">
-            @AddDelivery()
+            @Html.Partial("_AddDelivery")
         </div>
         <div role="tabpanel" class="tab-pane" id="monthDelivery">
             @MonthDelivery()
@@ -24,7 +28,9 @@
     </div>
 </div>
 
-
+@section scripts{
+    <script src="~/Scripts/Delivery/DeliveryIndex.js"></script>
+}
 
 @helper QueryDelivery()
 {
@@ -35,19 +41,13 @@
     </div>
 }
 
-@helper AddDelivery()
-{
-    <div class="row">
-        <div class="col-lg-12">
-            新增出貨單
-        </div>
-    </div>
-}
 
 @helper MonthDelivery()
 {
     <div class="row">
-        <div class="col-lg-12">月結報表</div>
+        <div class="col-lg-12">
+            月結報表
+        </div>
     </div>
 }
 

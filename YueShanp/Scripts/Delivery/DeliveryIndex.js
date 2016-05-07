@@ -1,5 +1,5 @@
 (function ($) {
-    $('#myTabs a').click(function (e) {
+    $('#deliveryIndextTab a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
     });
