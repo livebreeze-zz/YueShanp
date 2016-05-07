@@ -20,6 +20,11 @@ namespace YueShanp.Controllers
             this.deliveryRepository = new DeliveryRepository();
         }
 
+        public ActionResult DeliveryIndex()
+        {
+            return View();
+        }
+
         // GET: Delivery orders
         [AllowAnonymous]
         public ActionResult DeliveryOrderList(int? customerId)
