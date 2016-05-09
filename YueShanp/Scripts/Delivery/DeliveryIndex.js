@@ -1,6 +1,12 @@
 (function ($, angular) {
-    $('#deliveryIndextTab a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-    });
+    (function () {
+        $('#deliveryIndextTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    })();
+    angular.module('mvcapp', ['ui.bootstrap', 'ngMessages', 'ServiceCommon'])
+        .controller('DeliveryIndexCtrl', ['$scope', '$http', '$q', function () {
+        }]);
 })(jQuery, angular);
+//# sourceMappingURL=DeliveryIndex.js.map

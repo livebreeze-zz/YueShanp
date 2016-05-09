@@ -1,0 +1,1 @@
+{"version":3,"file":"ServiceCommon.js","sourceRoot":"","sources":["ServiceCommon.ts"],"names":[],"mappings":"AAAC,CAAC,UAAU,OAAO;IACf,OAAO,CAAC,MAAM,CAAC,eAAe,EAAE,EAAE,CAAC;SAC9B,QAAQ,CAAC,gBAAgB,EAAE;QACxB,OAAO,EAAE,IAAI;KAChB,CAAC,CAAC;AACX,CAAC,CAAC,CAAC,OAAO,CAAC,CAAA"}
