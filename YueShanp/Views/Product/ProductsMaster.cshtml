@@ -17,7 +17,7 @@
             @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().QuotedPrice)
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().UnitPrice)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Note)
@@ -33,7 +33,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QuotedPrice)
+                @Html.DisplayFor(modelItem => item.UnitPrice)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Note)

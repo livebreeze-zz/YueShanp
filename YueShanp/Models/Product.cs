@@ -11,8 +11,8 @@ namespace YueShanp.Models
         public string Name { get; set; }
 
         [Required]
-        [DisplayName("產品報價")]
-        public decimal QuotedPrice { get; set; }
+        [DisplayName("單價")]
+        public decimal UnitPrice { get; set; }
 
         [DisplayName("備註")]
         public string Note { get; set; }

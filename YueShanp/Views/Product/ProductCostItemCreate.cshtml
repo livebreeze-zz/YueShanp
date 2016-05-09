@@ -14,7 +14,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>@product.Name (報價:$@product.QuotedPrice)</h4>
+            <h4>@product.Name (報價:$@product.UnitPrice)</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -43,7 +43,7 @@
 
             @Html.HiddenFor(model => model.Product.Id)
             @Html.HiddenFor(model => model.Product.Name)
-            @Html.HiddenFor(model => model.Product.QuotedPrice)
+            @Html.HiddenFor(model => model.Product.UnitPrice)
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
