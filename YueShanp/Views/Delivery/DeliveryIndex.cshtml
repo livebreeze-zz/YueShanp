@@ -1,4 +1,6 @@
-﻿
+﻿@using YueShanp.Models
+@model DeliveryIndexViewModel
+
 @{
     ViewBag.Title = "DeliveryIndex";
 }
@@ -7,7 +9,7 @@
     <link href="~/Content/Delivery/DeliveryIndex.min.css" rel="stylesheet" />
 }
 
-<h2>DeliveryIndex</h2>
+<h2>出貨單系統</h2>
 <div class="container">
     <ul id="deliveryIndextTab" class="nav nav-tabs">
         <li class="active"><a href="#queryDelivery">查詢</a></li>
@@ -20,7 +22,7 @@
             @QueryDelivery()
         </div>
         <div role="tabpanel" class="tab-pane" id="addDelivery">
-            @Html.Partial("_AddDelivery")
+            @Html.Partial("_AddDelivery", new ViewDataDictionary { { nameof(DeliveryIndexViewModel.CustomerList), Model.CustomerList.ToList() } })
         </div>
         <div role="tabpanel" class="tab-pane" id="monthDelivery">
             @MonthDelivery()
@@ -28,7 +30,7 @@
     </div>
 </div>
 
-@section scripts{
+@section scriptsAtFoot{
     <script src="~/Scripts/Delivery/DeliveryIndex.js"></script>
 }
 

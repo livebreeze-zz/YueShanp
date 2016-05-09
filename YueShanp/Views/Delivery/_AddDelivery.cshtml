@@ -1,116 +1,131 @@
-﻿<!--Add Delivery-->
-<form role="form">
-    <div class="row">
-        <!-- Add Delivery Basic Info -->
-        <div class="col-md-8 col-lg-8">
-            <div class="row">
-                <div class="col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <label>客戶名稱</label>
-                        <input type="text" class="form-control" list="customerNameList" required />
-                        @*TODO 客戶名稱驗證*@
-                        <datalist id="customerNameList">
-                            <option value="精誠"></option>
-                            <option value="來通"></option>
-                        </datalist>
+﻿@using YueShanp.Models
+
+@{
+    var customerList = (List<Customer>)ViewData[nameof(DeliveryIndexViewModel.CustomerList)];
+}
+
+@section scriptsAtFoot{
+    <script src="~/Scripts/Common/ServiceCommon.js"></script>
+    <script src="~/Scripts/Common/CommonHelper.js"></script>
+    <script src="~/Scripts/Delivery/AddDelivery.js"></script>
+}
+
+<div ng-model="mvcapp" ng-controller="addDeliveryCtrl">
+    <!--Add Delivery-->
+    <form role="form">
+        <div class="row">
+            <!-- Add Delivery Basic Info -->
+            <div class="col-md-8 col-lg-8">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>客戶名稱</label>
+                            <input type="text" class="form-control" list="customerNameList" required ng-model="selectCustomer" />
+                            @*TODO 客戶名稱驗證*@
+                            <datalist id="customerNameList">
+                                @foreach (var customer in customerList)
+                                {
+                                    <option value="@customer.Name"></option>
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>送貨單編號</label>
+                            <input type="number" class="form-control" maxlength="10" value="" required ng-model="deliveryOrderNumber"/>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <label>送貨單編號</label>
-                        <input type="number" class="form-control" maxlength="10" value="" required />
+                <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>送貨日期</label>
+                            <drcalander name="startdaycal" format="{{format}}" datemodel="deliveryDate"></drcalander>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>帳款月份</label>
+                            <input type="number" class="form-control" size="5" value="" placeholder="10505" required ng-model="accountMonth"/>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <label>送貨日期</label>
-                        <input type="datetime" class="form-control" value="" placeholder="yyy(民國)/MM/dd" formaction="" required />
-                        @*TODO: Add the angular calender*@
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <label>帳款月份</label>
-                        <input type="number" class="form-control" size="5" value="" placeholder="10505" required />
+            <div class="col-md-4 col-lg-4">
+                <label>快速動作</label>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @*<button type="button" role="button" class="btn btn-default">尋找其他送貨單</button>*@
+                        <button type="button" role="button" class="btn btn-default">新增品項</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-4">
-            <label>快速動作</label>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    @*<button type="button" role="button" class="btn btn-default">尋找其他送貨單</button>*@
-                    <button type="button" role="button" class="btn btn-default">新增品項</button>
+
+        <hr />
+
+        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>項次</th>
+                        <th>品名</th>
+                        <th>單價</th>
+                        <th>數量</th>
+                        <th>小計</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*TODO Repeater *@
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </td>
+                        <td>01</td>
+                        <td>
+                            <input type="text" list="productNameList" />
+                            <datalist id="productNameList">
+                                @*TODO repeater*@
+                                <option value="EB212004 AMP插座4P  1-178314-2(9.2)"></option>
+                                <option value="EV749A00  112cm (05.04)"></option>
+                                <option value="EB222010 AMP插座1-178288-8(03.09)"></option>
+                                <option value="EB242020 AMP插座 178289-8 (9.2)"></option>
+                            </datalist>
+                        </td>
+                        <td>
+                            <input type="number" value="" />
+                        </td>
+                        <td>
+                            <input type="number" min="1" max="9999" maxlength="4" />
+                        </td>
+                        <td>
+                            @*TODO money filter*@
+                            <span class="subTotal">$7,500.0</span>
+                        </td>
+                    </tr>
+                    <tr class="table_bottomRow">
+                        <td colspan="5">
+                            <button><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                        </td>
+                        <td class="orderTotal">
+                            @*TODO money filter*@
+                            總計：<span>$12,245.0</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button class="btn btn-primary">預覽</button>
+                    <button class="btn btn-primary">儲存</button>
+                    <button class="btn btn-primary">儲存並新增</button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <hr />
-
-    <div class="row">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>項次</th>
-                    <th>品名</th>
-                    <th>單價</th>
-                    <th>數量</th>
-                    <th>小計</th>
-                </tr>
-            </thead>
-            <tbody>
-                @*TODO Repeater *@
-                <tr>
-                    <td>
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </td>
-                    <td>01</td>
-                    <td>
-                        <input type="text" list="productNameList" />
-                        <datalist id="productNameList">
-                            @*TODO repeater*@
-                            <option value="EB212004 AMP插座4P  1-178314-2(9.2)"></option>
-                            <option value="EV749A00  112cm (05.04)"></option>
-                            <option value="EB222010 AMP插座1-178288-8(03.09)"></option>
-                            <option value="EB242020 AMP插座 178289-8 (9.2)"></option>
-                        </datalist>
-                    </td>
-                    <td>
-                        <input type="number" value="" />
-                    </td>
-                    <td>
-                        <input type="number" min="1" max="9999" maxlength="4" />
-                    </td>
-                    <td>
-                        @*TODO money filter*@
-                        <span class="subTotal">$7,500.0</span>
-                    </td>
-                </tr>
-                <tr class="table_bottomRow">
-                    <td colspan="5">
-                        <button><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                    </td>
-                    <td class="orderTotal">
-                        @*TODO money filter*@
-                        總計：<span>$12,245.0</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="pull-right">
-                <button class="btn btn-primary">預覽</button>
-                <button class="btn btn-primary">儲存</button>
-                <button class="btn btn-primary">儲存並新增</button>
-            </div>
-        </div>
-    </div>
-</form>
+    </form>
+</div>

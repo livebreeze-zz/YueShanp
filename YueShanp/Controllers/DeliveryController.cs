@@ -22,7 +22,11 @@ namespace YueShanp.Controllers
 
         public ActionResult DeliveryIndex()
         {
-            return View();
+            ViewData[nameof(AddDelivery)] = string.Empty;
+            var customerList = this.customerRepository.GetAll();
+            var viewModel = new DeliveryIndexViewModel() { CustomerList = customerList };
+
+            return View(viewModel);
         }
 
         // GET: Delivery orders
