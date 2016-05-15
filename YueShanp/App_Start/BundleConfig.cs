@@ -31,7 +31,8 @@ namespace YueShanp
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/Fonts/notosanstc.css"));
+                      "~/Content/Fonts/notosanstc.css",
+                      "~/Content/font-awesome.min.css"));
         }
     }
 }

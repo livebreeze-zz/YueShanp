@@ -4,3 +4,4 @@
         HostUrl: '//'
     });
 })(angular);
+//# sourceMappingURL=ServiceCommon.js.map
