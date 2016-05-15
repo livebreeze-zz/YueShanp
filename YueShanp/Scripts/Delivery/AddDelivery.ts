@@ -13,23 +13,22 @@ class Product {
     Qty: number;
 }
 
-(function ($, angular) {
-    angular.module('mvcapp', ['ui.bootstrap', 'ngMessages', 'ServiceCommon', 'CommonHelper'])
-        .controller('addDeliveryCtrl', ['$scope', '$http', '$filter', '$q',
-            function ($scope, $http, $filter, $q) {
-                // MODELs
-                $scope.selectCustomer = '';
-                $scope.deliveryOrderNumber = 0;
-                $scope.deliveryDate = $scope.FormatDate(new Date());
-                $scope.accountMonth = '';
-
-                // ATTRIBUTEs
-                $scope.format = 'yyyy/MM/dd';
-
+(function () {
+    angular.module('mvcApp', ['ui.bootstrap', 'ServiceCommon', 'CommonHelper'])
+        .controller('addDeliveryCtrl', ['$scope', '$http', '$filter',
+            function ($scope, $http, $filter) {
                 // FUNCTIONs
                 $scope.FormatDate = function (date) {
                     return $filter('date')(date, $scope.format);
                 };
 
+                // ATTRIBUTEs
+                $scope.format = 'yyyy/MM/dd';
+
+                // MODELs
+                $scope.selectCustomer = '';
+                $scope.deliveryOrderNumber = 0;
+                $scope.deliveryDate = $scope.FormatDate(new Date());
+                $scope.accountMonth = '';
             }]);
-})(jQuery, angular)
+})();

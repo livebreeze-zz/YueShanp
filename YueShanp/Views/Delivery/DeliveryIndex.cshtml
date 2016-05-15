@@ -10,7 +10,7 @@
 }
 
 <h2>出貨單系統</h2>
-<div class="container">
+<div class="container" ng-app="mvcApp" >
     <ul id="deliveryIndextTab" class="nav nav-tabs">
         <li class="active"><a href="#addDelivery">新增</a></li>
         <li><a href="#queryDelivery">查詢</a></li>
@@ -19,11 +19,13 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="addDelivery">
-            @Html.Partial("_AddDelivery", new ViewDataDictionary { { nameof(DeliveryIndexViewModel.CustomerList), Model.CustomerList.ToList() } })
+            <div ng-controller="addDeliveryCtrl">
+                @Html.Partial("_AddDelivery", new ViewDataDictionary { { nameof(DeliveryIndexViewModel.CustomerList), Model.CustomerList.ToList() } })
+            </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="queryDelivery">
             @QueryDelivery()
-        </div>       
+        </div>
         <div role="tabpanel" class="tab-pane" id="monthDelivery">
             @MonthDelivery()
         </div>
@@ -32,6 +34,11 @@
 
 @section scriptsAtFoot{
     <script src="~/Scripts/Delivery/DeliveryIndex.js"></script>
+
+    <!--_AddDelivery.cshtml-->
+    <script src="~/Scripts/Delivery/AddDelivery.js"></script>
+    <script src="~/Scripts/Common/ServiceCommon.js"></script>
+    <script src="~/Scripts/Common/CommonHelper.js"></script>
 }
 
 @helper QueryDelivery()
