@@ -76,7 +76,11 @@
                 <tbody>
                     <tr ng-repeat="product in ProductList">
                         <td class="td_Operation">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <a ng-click="RemoveProduct($index)">
+                                <span class="fa-stack fa-1x">
+                                    <i class="fa fa-times fa-stack-1x"></i>
+                                </span>
+                            </a>
                         </td>
                         <td class="td_index">{{$index +1}}</td>
                         <td class="td_productName">

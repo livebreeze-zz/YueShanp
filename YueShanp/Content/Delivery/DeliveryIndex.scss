@@ -8,6 +8,17 @@ $orderTotalLeftAlign: -30px;
 #addDelivery table {
     .td_Operation {
         width: 5%;
+
+        .fa-stack .fa-times {
+            color: #808080;
+            font-size: larger;
+        }
+
+        .fa-times:hover:before {
+            content: "\f057";
+            color: #c33;
+            font-size: x-large;
+        }
     }
 
     .td_index {
@@ -15,7 +26,7 @@ $orderTotalLeftAlign: -30px;
     }
 
     .td_productName {
-        width: 40%;       
+        width: 40%;
     }
 
     .td_unitPrice {

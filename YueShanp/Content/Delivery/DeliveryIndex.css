@@ -3,6 +3,13 @@
 
 #addDelivery table .td_Operation {
   width: 5%; }
+  #addDelivery table .td_Operation .fa-stack .fa-times {
+    color: #808080;
+    font-size: larger; }
+  #addDelivery table .td_Operation .fa-times:hover:before {
+    content: "\f057";
+    color: #c33;
+    font-size: x-large; }
 
 #addDelivery table .td_index {
   width: 5%; }

@@ -26,6 +26,9 @@ var Product = (function () {
                 });
                 return result;
             };
+            $scope.RemoveProduct = function (index) {
+                $scope.ProductList.splice(index, 1);
+            };
             // ATTRIBUTEs
             $scope.format = 'yyyy/MM/dd';
             // MODELs
