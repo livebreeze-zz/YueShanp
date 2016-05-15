@@ -59,7 +59,7 @@ namespace YueShanp.Controllers
             {
                 EntityHelper<Customer>.CreateBaseEntity(customer, User.Identity.Name);
                 this.customerRepository.Create(customer);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(CustomerController.CustomerIndex));
             }
 
             return View(customer);
@@ -94,7 +94,7 @@ namespace YueShanp.Controllers
                 EntityHelper<Customer>.EditBaseEntity(customer, User.Identity.Name);
                 this.customerRepository.Update(customer);
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(CustomerController.CustomerIndex));
             }
             return View(customer);
         }
@@ -130,7 +130,7 @@ namespace YueShanp.Controllers
             this.customerRepository.Update(customer);
             //this.customerRepository.Delete(customer);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(CustomerController.CustomerIndex));
         }
     }
 }
