@@ -27,7 +27,7 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                             <label>送貨單編號</label>
-                            <input type="number" class="form-control" maxlength="10" value="" required ng-model="deliveryOrderNumber" />
+                            <input type="number" class="form-control" value="" required ng-model="deliveryOrderNumber" />
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                             <label>帳款月份</label>
-                            <input type="number" class="form-control" size="5" value="" placeholder="10505" required ng-model="accountMonth" />
+                            <input type="number" class="form-control" value="" placeholder="10505" required ng-model="accountMonth" />
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         </td>
                         <td class="td_index">{{$index +1}}</td>
                         <td class="td_productName">
-                            <input type="text" list="productNameList" />
+                            <input type="text" class="form-control input-sm" list="productNameList" ng-model="product.ProductName" />
                             <datalist id="productNameList">
                                 @*TODO repeater*@
                                 <option value="EB212004 AMP插座4P  1-178314-2(9.2)"></option>
@@ -90,10 +90,10 @@
                             </datalist>
                         </td>
                         <td class="td_unitPrice">
-                            <input type="number" value="" ng-model="product.UnitPrice" />
+                            <input type="number" class="form-control input-sm" value="" ng-model="product.UnitPrice" />
                         </td>
                         <td class="td_qty">
-                            <input type="number" min="1" max="9999" maxlength="4" ng-model="product.Qty" />
+                            <input type="number" class="form-control input-sm" min="1" max="9999" maxlength="4" ng-model="product.Qty" />
                         </td>
                         <td class="td_subTotal">
                             @*TODO money filter*@

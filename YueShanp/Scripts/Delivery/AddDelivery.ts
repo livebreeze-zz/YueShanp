@@ -38,7 +38,7 @@ class Product {
 
                 // MODELs
                 $scope.selectCustomer = '';
-                $scope.deliveryOrderNumber = 0;
+                $scope.deliveryOrderNumber;
                 $scope.deliveryDate = $scope.FormatDate(new Date());
                 $scope.accountMonth = '';
                 $scope.ProductList = new Array<Product>();
