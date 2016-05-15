@@ -16,6 +16,16 @@ var Product = (function () {
             $scope.FormatDate = function (date) {
                 return $filter('date')(date, $scope.format);
             };
+            $scope.AddProduct = function () {
+                $scope.ProductList.push(new Product());
+            };
+            $scope.getOrderTotalAmount = function () {
+                var result = 0;
+                $scope.ProductList.forEach(function (entry) {
+                    result += entry.UnitPrice * entry.Qty;
+                });
+                return result;
+            };
             // ATTRIBUTEs
             $scope.format = 'yyyy/MM/dd';
             // MODELs
@@ -23,6 +33,6 @@ var Product = (function () {
             $scope.deliveryOrderNumber = 0;
             $scope.deliveryDate = $scope.FormatDate(new Date());
             $scope.accountMonth = '';
+            $scope.ProductList = new Array();
         }]);
 })();
-//# sourceMappingURL=AddDelivery.js.map

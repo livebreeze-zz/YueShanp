@@ -21,6 +21,17 @@ class Product {
                 $scope.FormatDate = function (date) {
                     return $filter('date')(date, $scope.format);
                 };
+                $scope.AddProduct = function () {
+                    $scope.ProductList.push(new Product());
+                };
+                $scope.getOrderTotalAmount = function () {
+                    let result = 0;
+                    $scope.ProductList.forEach(function (entry: Product) {
+                        result += entry.UnitPrice * entry.Qty;
+                    });
+
+                    return result;
+                };
 
                 // ATTRIBUTEs
                 $scope.format = 'yyyy/MM/dd';
@@ -30,5 +41,6 @@ class Product {
                 $scope.deliveryOrderNumber = 0;
                 $scope.deliveryDate = $scope.FormatDate(new Date());
                 $scope.accountMonth = '';
+                $scope.ProductList = new Array<Product>();
             }]);
-})();
+})();   
