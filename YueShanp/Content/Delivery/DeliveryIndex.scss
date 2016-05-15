@@ -1,6 +1,32 @@
-﻿$navTabBottom : 15px;
+﻿$navTabBottom: 15px;
 $orderTotalLeftAlign: -30px;
 
 .nav-tabs {
-    margin-bottom: $navTabBottom
+    margin-bottom: $navTabBottom;
+}
+
+#addDelivery table {
+    .td_Operation {
+        width: 5%;
+    }
+
+    .td_index {
+        width: 5%;
+    }
+
+    .td_productName {
+        width: 40%;
+    }
+
+    .td_unitPrice {
+        width: 10%;
+    }
+
+    .td_qty {
+        width: 10%
+    }
+
+    .td_subTotal {
+        width: 30%;
+    }
 }

@@ -1,3 +1,21 @@
 ﻿.nav-tabs {
   margin-bottom: 15px; }
 
+#addDelivery table .td_Operation {
+  width: 5%; }
+
+#addDelivery table .td_index {
+  width: 5%; }
+
+#addDelivery table .td_productName {
+  width: 40%; }
+
+#addDelivery table .td_unitPrice {
+  width: 10%; }
+
+#addDelivery table .td_qty {
+  width: 10%; }
+
+#addDelivery table .td_subTotal {
+  width: 30%; }
+
