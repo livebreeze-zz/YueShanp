@@ -1,4 +1,19 @@
-﻿(function ($, angular) {
+﻿class DeliveryOrder {
+    CustomerId: number;
+    OrderNumber: number;
+    DeliveryDate: string;
+    AccountMonth: string;
+    ProductList: Array<Product>; 
+}
+
+class Product {
+    ProductId: number;
+    ProductName: string;
+    UnitPrice: number;
+    Qty: number;
+}
+
+(function ($, angular) {
     angular.module('mvcapp', ['ui.bootstrap', 'ngMessages', 'ServiceCommon', 'CommonHelper'])
         .controller('addDeliveryCtrl', ['$scope', '$http', '$filter', '$q',
             function ($scope, $http, $filter, $q) {

@@ -1,3 +1,13 @@
+var DeliveryOrder = (function () {
+    function DeliveryOrder() {
+    }
+    return DeliveryOrder;
+}());
+var Product = (function () {
+    function Product() {
+    }
+    return Product;
+}());
 (function ($, angular) {
     angular.module('mvcapp', ['ui.bootstrap', 'ngMessages', 'ServiceCommon', 'CommonHelper'])
         .controller('addDeliveryCtrl', ['$scope', '$http', '$filter', '$q',

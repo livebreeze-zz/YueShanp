@@ -12,18 +12,18 @@
 <h2>出貨單系統</h2>
 <div class="container">
     <ul id="deliveryIndextTab" class="nav nav-tabs">
-        <li class="active"><a href="#queryDelivery">查詢</a></li>
-        <li><a href="#addDelivery">新增</a></li>
+        <li class="active"><a href="#addDelivery">新增</a></li>
+        <li><a href="#queryDelivery">查詢</a></li>
         <li><a href="#monthDelivery">月結單</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="queryDelivery">
-            @QueryDelivery()
-        </div>
-        <div role="tabpanel" class="tab-pane" id="addDelivery">
+        <div role="tabpanel" class="tab-pane active" id="addDelivery">
             @Html.Partial("_AddDelivery", new ViewDataDictionary { { nameof(DeliveryIndexViewModel.CustomerList), Model.CustomerList.ToList() } })
         </div>
+        <div role="tabpanel" class="tab-pane" id="queryDelivery">
+            @QueryDelivery()
+        </div>       
         <div role="tabpanel" class="tab-pane" id="monthDelivery">
             @MonthDelivery()
         </div>
