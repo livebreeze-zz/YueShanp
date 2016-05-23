@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using YueShanp.Models;
 using YueShanp.Models.Interface;
 
@@ -22,6 +23,15 @@ namespace YueShanp.Controllers
             var productList = this.productRepository.GetAll(customerId);
 
             return Json(productList);
+        }
+
+        public JsonResult AddDeliveryOrderUrl()
+        {
+
+            return Json(new Dictionary<string, object>()
+            {
+                { "IsSuccess", true }
+            });
         }
     }
 }

@@ -26,6 +26,8 @@ var Product = (function () {
                 });
                 return result;
             };
+            $scope.SavePrint = function () {
+            };
             $scope.RemoveProduct = function (index) {
                 $scope.ProductList.splice(index, 1);
             };
