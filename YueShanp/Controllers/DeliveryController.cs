@@ -42,5 +42,10 @@ namespace YueShanp.Controllers
 
             return View(deliveryOrders.ToList());
         }
+
+        public ActionResult ModalPrePrintDeliveryOrder()
+        {
+            return View();
+        }
     }
 }

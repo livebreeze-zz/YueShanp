@@ -1,0 +1,56 @@
+﻿@{ 
+    Layout = null;
+}
+
+<div class="modal-dialog" role="document" ng-app="mvcApp" ng-controller="addDeliveryCtrl">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="ModalPrePrintDeliveryOrderLabel">送貨單查詢</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="preprint-customer">精誠</span>
+                    <span class="pull-right">105 年 05 月 15 日</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>項次</th>
+                                <th>品名</th>
+                                <th>單價</th>
+                                <th>數量</th>
+                                <th>小計</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="product in ProductList">
+                                <td class="td_index">{{$index +1}}</td>
+                                <td class="td_productName">{{product.ProductName}}</td>
+                                <td class="td_unitPrice">{{product.UnitPrice}}</td>
+                                <td class="td_qty">{{product.Qty}}</td>
+                                <td class="td_subTotal">{{product.UnitPrice * product.Qty | currency}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    總計：<span>{{getOrderTotalAmount() | currency}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">列印</button>
+        </div>
+    </div>
+</div>

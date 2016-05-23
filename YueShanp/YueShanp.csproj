@@ -362,6 +362,7 @@
     <Content Include="Views\Product\ProductIndex.cshtml" />
     <Content Include="Views\Delivery\DeliveryIndex.cshtml" />
     <Content Include="Views\Delivery\_AddDelivery.cshtml" />
+    <Content Include="Views\Delivery\ModalPrePrintDeliveryOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

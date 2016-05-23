@@ -39,6 +39,8 @@
             <p>&copy; @DateTime.Now.Year - 裕上企業管理系統</p>
         </footer>
     </div>
+    
+    @RenderSection("modal", required: false)
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/angular")

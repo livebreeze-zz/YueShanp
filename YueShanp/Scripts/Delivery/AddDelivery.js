@@ -39,3 +39,4 @@ var Product = (function () {
             $scope.ProductList = new Array();
         }]);
 })();
+//# sourceMappingURL=AddDelivery.js.map

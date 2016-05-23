@@ -1,4 +1,5 @@
-﻿@using YueShanp.Models
+﻿@using YueShanp.Controllers
+@using YueShanp.Models
 @model DeliveryIndexViewModel
 
 @{
@@ -31,6 +32,13 @@
         </div>
     </div>
 </div>
+
+@section modal{
+    <!-- Modal -->
+    <div class="modal fade" id="ModalPrePrintDeliveryOrder" tabindex="-1" role="dialog" aria-labelledby="ModalPrePrintDeliveryOrderLabel" aria-hidden="true">
+        @Html.Partial("ModalPrePrintDeliveryOrder")
+    </div>
+}
 
 @section scriptsAtFoot{
     <script src="~/Scripts/Delivery/DeliveryIndex.js"></script>
