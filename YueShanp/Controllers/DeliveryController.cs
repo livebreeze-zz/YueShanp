@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using YueShanp.Filter;
 using YueShanp.Models;
 using YueShanp.Models.Interface;
 
 namespace YueShanp.Controllers
 {
-    [Authorize]
+    [WebAuthorize]
     public class DeliveryController : Controller
     {
         private ICustomerRepository customerRepository;

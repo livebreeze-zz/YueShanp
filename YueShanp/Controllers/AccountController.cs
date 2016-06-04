@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using YueShanp.Helper;
 using YueShanp.Models;
 
 namespace YueShanp.Controllers
@@ -76,6 +77,7 @@ namespace YueShanp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    Session[SessionKey.Account.LoginName] = model.Email;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
