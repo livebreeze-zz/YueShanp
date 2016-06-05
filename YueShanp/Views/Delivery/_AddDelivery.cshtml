@@ -55,6 +55,7 @@
                     <div class="panel-body">
                         @*<button type="button" role="button" class="btn btn-default">尋找其他送貨單</button>*@
                         <button type="button" role="button" class="btn btn-default">新增品項</button>
+                        <button type="button" role="button" class="btn btn-default">新增客戶</button>
                     </div>
                 </div>
             </div>
@@ -75,7 +76,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="product in ProductList">
+                    <tr ng-repeat="deliveryOrderDetail in DeliveryOrderDetailList">
                         <td class="td_Operation">
                             <a ng-click="RemoveProduct($index)">
                                 <span class="fa-stack fa-1x">
@@ -85,7 +86,7 @@
                         </td>
                         <td class="td_index">{{$index +1}}</td>
                         <td class="td_productName">
-                            <input type="text" class="form-control input-sm" list="productNameList" ng-model="product.ProductName" />
+                            <input type="text" class="form-control input-sm" list="productNameList" ng-model="deliveryOrderDetail.product.ProductName" />
                             <datalist id="productNameList">
                                 @*TODO repeater*@
                                 <option value="EB212004 AMP插座4P  1-178314-2(9.2)"></option>
@@ -95,14 +96,14 @@
                             </datalist>
                         </td>
                         <td class="td_unitPrice">
-                            <input type="number" class="form-control input-sm" value="" ng-model="product.UnitPrice" />
+                            <input type="number" class="form-control input-sm" value="" ng-model="deliveryOrderDetail.product.UnitPrice" />
                         </td>
                         <td class="td_qty">
-                            <input type="number" class="form-control input-sm" min="1" max="9999" maxlength="4" ng-model="product.Qty" />
+                            <input type="number" class="form-control input-sm" min="1" max="9999" maxlength="4" ng-model="deliveryOrderDetail.Qty" />
                         </td>
                         <td class="td_subTotal">
                             @*TODO money filter*@
-                            <span class="subTotal">{{product.UnitPrice * product.Qty | currency}}</span>
+                            <span class="subTotal">{{deliveryOrderDetail.product.UnitPrice * deliveryOrderDetail.Qty | currency}}</span>
                         </td>
                     </tr>
                     <tr class="table_bottomRow">

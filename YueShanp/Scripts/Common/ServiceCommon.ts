@@ -1,5 +1,5 @@
 ﻿interface IYSService {
-    PostDeliveryOrder(request: IDeliveryOrderRequest): ng.IPromise<{}>;
+    PostDeliveryOrder(config: IDeliveryOrderConfig): ng.IPromise<any>;
 }
 
 interface IYSConfig {
@@ -13,7 +13,54 @@ interface IRespResult {
 }
 
 interface IDeliveryOrderRequest {
-    // TODO set request model.
+    DeliveryOrderNumber: number,
+    CustomerSONumber: string,
+    DeliveryOrderDate: string,
+    ReceivableMonth: string,
+    Customer: Customer,
+    DeliveryOrderDetailList: Array<DeliveryOrderDetail>;
+}
+
+interface IDeliveryOrderConfig extends ng.IRequestShortcutConfig {
+    data: IDeliveryOrderRequest;
+}
+
+class Customer {
+    Id: number;
+    Name: string;
+    FullName: string;
+    Phone: string;
+    Fax: string;
+    Address: string;
+    Email: string;
+    Purchaser: string;
+    TIN: string;
+
+    constructor(id: number) {
+        this.Id = id;
+    }
+}
+
+class DeliveryOrderDetail {
+    Qty: number;
+    Product: Product
+
+    constructor(qty: number, product: Product) {
+        this.Qty = qty;
+        this.Product = product;
+    }
+}
+
+class Product {
+    ProductId: number;
+    ProductName: string;
+    UnitPrice: number;
+
+    constructor(productId: number, productName: string, unitPrice: number) {
+        this.ProductId = productId;
+        this.ProductName = productName;
+        this.UnitPrice = unitPrice;
+    }
 }
 
 (function (angular) {
@@ -27,7 +74,7 @@ interface IDeliveryOrderRequest {
                 var hostUrl: string = YSConfig.HostUrl;
                 var addDeliveryOrderUrl: string = `${hostUrl}/ajax/AddDeliveryOrder`;
 
-                function PostDeliveryOrder(request: IDeliveryOrderRequest) {
+                function PostDeliveryOrder(config: IDeliveryOrderConfig) {
                     debugger;
                     var deferred = $q.defer();
                     var opts = <ng.IRequestConfig>{
@@ -35,15 +82,13 @@ interface IDeliveryOrderRequest {
                         method: 'POST'
                     };
 
-                    angular.extend(opts, request);
+                    angular.extend(opts, config);
 
                     $http(opts).then(function (response) {
                         debugger;
                         var responseObj = <IRespResult>response.data;
                         if (responseObj) {
                             if (responseObj.IsSuccess) {
-
-                                //// TODO: 設定頁面需要用到的接口
                                 deferred.resolve(responseObj);
                             }
                         }

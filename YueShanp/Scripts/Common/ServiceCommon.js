@@ -1,3 +1,24 @@
+var Customer = (function () {
+    function Customer(id) {
+        this.Id = id;
+    }
+    return Customer;
+}());
+var DeliveryOrderDetail = (function () {
+    function DeliveryOrderDetail(qty, product) {
+        this.Qty = qty;
+        this.Product = product;
+    }
+    return DeliveryOrderDetail;
+}());
+var Product = (function () {
+    function Product(productId, productName, unitPrice) {
+        this.ProductId = productId;
+        this.ProductName = productName;
+        this.UnitPrice = unitPrice;
+    }
+    return Product;
+}());
 (function (angular) {
     angular.module('ServiceCommon', [])
         .constant('YSConfig', {
@@ -7,20 +28,19 @@
         function ($http, $q, YSConfig) {
             var hostUrl = YSConfig.HostUrl;
             var addDeliveryOrderUrl = hostUrl + "/ajax/AddDeliveryOrder";
-            function PostDeliveryOrder(request) {
+            function PostDeliveryOrder(config) {
                 debugger;
                 var deferred = $q.defer();
                 var opts = {
                     url: addDeliveryOrderUrl,
                     method: 'POST'
                 };
-                angular.extend(opts, request);
+                angular.extend(opts, config);
                 $http(opts).then(function (response) {
                     debugger;
                     var responseObj = response.data;
                     if (responseObj) {
                         if (responseObj.IsSuccess) {
-                            //// TODO: 設定頁面需要用到的接口
                             deferred.resolve(responseObj);
                         }
                     }

@@ -27,20 +27,30 @@ namespace YueShanp.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddDeliveryOrder()
+        [ValidateAntiForgeryToken]
+        public JsonResult AddDeliveryOrder([Bind(Include = "Id,DeliveryOrderNumber,CustomerSONumber,DeliveryOrderDate,ReceivableMonth,Customer,DeliveryOrderDetailList")] DeliveryOrder deliveryOrder)
         {
-            var deliveryOrder = new DeliveryOrder()
-            {
-                CreateTime = DateTime.Now,
-                Creator = User.Identity.Name,
-                
+            deliveryOrder.CreateTime = deliveryOrder.LastEditTime = DateTime.Now;
+            deliveryOrder.Creator = deliveryOrder.LastEditor = User.Identity.Name;
+            deliveryOrder.EntityStatus = EntityStatus.Enabled;
 
-            };
-            //this.deliveryRepository.CreateDeliveryOrder()
-            return Json(new Dictionary<string, object>()
+            var responseDic = new Dictionary<string, object>()
             {
-                { "IsSuccess", true }
-            });
+                { "IsSuccess", false },
+                { "ErrorMessage", string.Empty }
+            };
+
+            try
+            {
+                this.deliveryRepository.CreateDeliveryOrder(deliveryOrder);
+                responseDic["IsSuccess"] = true;
+            }
+            catch (Exception ex)
+            {
+                responseDic["ErrorMessage"] = ex.ToString();
+            }
+
+            return Json(responseDic);
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using YueShanp.Models.Interface;
 
 namespace YueShanp.Models
 {
-    public class DeliveryRepository : IDeliveryRepository
+    public class DeliveryRepository : IDeliveryRepository, IDisposable
     {
         protected YueShanpContext db
         {
@@ -21,7 +22,17 @@ namespace YueShanp.Models
 
         public void CreateDeliveryOrder(DeliveryOrder instance)
         {
-            throw new NotImplementedException();
+            if (instance == null)
+            {
+                throw new ArgumentException(nameof(DeliveryOrder));
+            }
+            else
+            {
+                this.db.DeliveryOrders.Add(instance);
+                db.Entry(instance.Customer).State = EntityState.Unchanged;
+
+                this.SaveChanges();
+            }
         }
 
         public void Delete(DeliveryOrder instance)
@@ -29,24 +40,45 @@ namespace YueShanp.Models
             throw new NotImplementedException();
         }
 
-        public DeliveryOrder Get(int DeliveryOrderId)
+        public DeliveryOrder Get(int deliveryOrderId)
         {
-            throw new NotImplementedException();
+            return db.DeliveryOrders.Find(deliveryOrderId);
         }
 
-        public IQueryable<DeliveryOrder> GetAll(int CustomerId)
+        public IQueryable<DeliveryOrder> GetAll(int customerId)
         {
-            return db.DeliveryOrders.OrderByDescending(o => o.Id).Where(w => w.EntityStatus == EntityStatus.Enabled);
+            return
+                db.DeliveryOrders
+                    .OrderByDescending(o => o.Id)
+                    .Where(w => w.Customer.Id == customerId && w.EntityStatus == EntityStatus.Enabled);
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            this.db.SaveChanges();
         }
 
         public void Update(DeliveryOrder instance)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this.db != null)
+                {
+                    this.db.Dispose();
+                    this.db = null;
+                }
+            }
         }
     }
 }
