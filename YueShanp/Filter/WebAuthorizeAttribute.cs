@@ -64,7 +64,7 @@ namespace YueShanp.Filter
                     {
                         {ControllerStr, DefaultController},
                         {ActionStr, DefaultAction},
-                        {"NextPage", nextpage}
+                        {"returnUrl", nextpage}
                     });
                 }
                 else

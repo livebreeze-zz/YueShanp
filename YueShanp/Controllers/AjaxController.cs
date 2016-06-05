@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using YueShanp.Models;
 using YueShanp.Models.Interface;
@@ -25,9 +26,17 @@ namespace YueShanp.Controllers
             return Json(productList);
         }
 
-        public JsonResult AddDeliveryOrderUrl()
+        [HttpPost]
+        public JsonResult AddDeliveryOrder()
         {
+            var deliveryOrder = new DeliveryOrder()
+            {
+                CreateTime = DateTime.Now,
+                Creator = User.Identity.Name,
+                
 
+            };
+            //this.deliveryRepository.CreateDeliveryOrder()
             return Json(new Dictionary<string, object>()
             {
                 { "IsSuccess", true }

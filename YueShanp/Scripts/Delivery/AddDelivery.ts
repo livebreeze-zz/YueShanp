@@ -15,8 +15,8 @@ class Product {
 
 (function () {
     angular.module('mvcApp', ['ui.bootstrap', 'ServiceCommon', 'CommonHelper'])
-        .controller('addDeliveryCtrl', ['$scope', '$http', '$filter',
-            function ($scope, $http, $filter) {
+        .controller('addDeliveryCtrl', ['$scope', '$http', '$filter', 'YSService',
+            function ($scope, $http, $filter, ysService: IYSService) {
                 // FUNCTIONs
                 $scope.FormatDate = function (date) {
                     return $filter('date')(date, $scope.format);
@@ -33,7 +33,16 @@ class Product {
                     return result;
                 };
                 $scope.SavePrint = function () {
+                    // TODO 將資料  POST 到 SERVICE
+                    var request = <ng.IRequestShortcutConfig>{
+                        data: {
+                            
+                        }
+                    };
+                    debugger;
+                    ysService.PostDeliveryOrder(request);
 
+                    // TODO 修改 MODAL 由 SERVICE 取值，或者先將資料記載臨時資料區
                 };
 
 

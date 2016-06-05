@@ -3,13 +3,13 @@
 }
 
 interface IYSConfig {
-    HostUrl: string,
+    HostUrl: string;
 }
 
 interface IRespResult {
     IsSuccess: boolean,
     Data: any,
-    ErrMsg: string
+    ErrMsg: string;
 }
 
 interface IDeliveryOrderRequest {
@@ -18,18 +18,19 @@ interface IDeliveryOrderRequest {
 
 (function (angular) {
     angular.module('ServiceCommon', [])
-        .constant('YueShanpConfig', <IYSConfig>{
+        .constant('YSConfig', <IYSConfig>{
             HostUrl: 'http://localhost:11074/'
         })
 
         .factory('YSService', ['$http', '$q', 'YSConfig',
             function ($http: ng.IHttpService, $q: ng.IQService, YSConfig: IYSConfig) {
-                let hostUrl = YSConfig.HostUrl;
-                let addDeliveryOrderUrl = `${hostUrl}/ajax/addDeliveryOrderUrl`;
+                var hostUrl: string = YSConfig.HostUrl;
+                var addDeliveryOrderUrl: string = `${hostUrl}/ajax/AddDeliveryOrder`;
 
                 function PostDeliveryOrder(request: IDeliveryOrderRequest) {
-                    let deferred = $q.defer();
-                    let opts = <ng.IRequestConfig>{
+                    debugger;
+                    var deferred = $q.defer();
+                    var opts = <ng.IRequestConfig>{
                         url: addDeliveryOrderUrl,
                         method: 'POST'
                     };
@@ -37,7 +38,8 @@ interface IDeliveryOrderRequest {
                     angular.extend(opts, request);
 
                     $http(opts).then(function (response) {
-                        let responseObj = <IRespResult>response.data;
+                        debugger;
+                        var responseObj = <IRespResult>response.data;
                         if (responseObj) {
                             if (responseObj.IsSuccess) {
 
@@ -56,7 +58,7 @@ interface IDeliveryOrderRequest {
 
                 return <IYSService>{
                     PostDeliveryOrder
-                }
-        }]);
+                };
+            }]);
 
-})(angular)
+})(angular);

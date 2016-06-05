@@ -1,13 +1,14 @@
 (function (angular) {
     angular.module('ServiceCommon', [])
-        .constant('YueShanpConfig', {
+        .constant('YSConfig', {
         HostUrl: 'http://localhost:11074/'
     })
         .factory('YSService', ['$http', '$q', 'YSConfig',
         function ($http, $q, YSConfig) {
             var hostUrl = YSConfig.HostUrl;
-            var addDeliveryOrderUrl = hostUrl + "/ajax/addDeliveryOrderUrl";
+            var addDeliveryOrderUrl = hostUrl + "/ajax/AddDeliveryOrder";
             function PostDeliveryOrder(request) {
+                debugger;
                 var deferred = $q.defer();
                 var opts = {
                     url: addDeliveryOrderUrl,
@@ -15,6 +16,7 @@
                 };
                 angular.extend(opts, request);
                 $http(opts).then(function (response) {
+                    debugger;
                     var responseObj = response.data;
                     if (responseObj) {
                         if (responseObj.IsSuccess) {
@@ -34,4 +36,3 @@
             };
         }]);
 })(angular);
-//# sourceMappingURL=ServiceCommon.js.map
