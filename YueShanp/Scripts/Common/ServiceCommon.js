@@ -12,14 +12,17 @@ var DeliveryOrderDetail = (function () {
     return DeliveryOrderDetail;
 })();
 var Product = (function () {
-    function Product() {
+    function Product(productId, productName, unitPrice) {
+        this.ProductId = productId;
+        this.ProductName = productName;
+        this.UnitPrice = unitPrice;
     }
     return Product;
 })();
 (function (angular) {
     angular.module('ServiceCommon', [])
         .constant('YSConfig', {
-        HostUrl: 'http://localhost:11074/'
+        HostUrl: 'http://localhost:11074'
     })
         .factory('YSService', ['$http', '$q', 'YSConfig',
         function ($http, $q, YSConfig) {

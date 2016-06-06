@@ -26,8 +26,8 @@ namespace YueShanp.Controllers
             return Json(productList);
         }
 
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public JsonResult AddDeliveryOrder([Bind(Include = "Id,DeliveryOrderNumber,CustomerSONumber,DeliveryOrderDate,ReceivableMonth,Customer,DeliveryOrderDetailList")] DeliveryOrder deliveryOrderModel)
         {
             var responseDic = new Dictionary<string, object>()
