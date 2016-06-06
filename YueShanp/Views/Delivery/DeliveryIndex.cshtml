@@ -3,14 +3,14 @@
 @model DeliveryIndexViewModel
 
 @{
-    ViewBag.Title = "DeliveryIndex";
+    ViewBag.Title = "出貨單";
 }
 
 @section styles{
     <link href="~/Content/Delivery/DeliveryIndex.min.css" rel="stylesheet" />
 }
 
-<h2>出貨單系統</h2>
+<h2>@ViewBag.Title</h2>
 <div class="container" ng-app="mvcApp" >
     <ul id="deliveryIndextTab" class="nav nav-tabs">
         <li class="active"><a href="#addDelivery">新增</a></li>

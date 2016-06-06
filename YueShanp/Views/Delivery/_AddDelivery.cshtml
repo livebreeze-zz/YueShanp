@@ -86,7 +86,7 @@
                         </td>
                         <td class="td_index">{{$index +1}}</td>
                         <td class="td_productName">
-                            <input type="text" class="form-control input-sm" list="productNameList" ng-model="deliveryOrderDetail.product.ProductName" />
+                            <input type="text" class="form-control input-sm" list="productNameList" ng-model="deliveryOrderDetail.Product.ProductName" />
                             <datalist id="productNameList">
                                 @*TODO repeater*@
                                 <option value="EB212004 AMP插座4P  1-178314-2(9.2)"></option>
@@ -96,22 +96,20 @@
                             </datalist>
                         </td>
                         <td class="td_unitPrice">
-                            <input type="number" class="form-control input-sm" value="" ng-model="deliveryOrderDetail.product.UnitPrice" />
+                            <input type="number" class="form-control input-sm" value="" ng-model="deliveryOrderDetail.Product.UnitPrice" />
                         </td>
                         <td class="td_qty">
                             <input type="number" class="form-control input-sm" min="1" max="9999" maxlength="4" ng-model="deliveryOrderDetail.Qty" />
                         </td>
                         <td class="td_subTotal">
-                            @*TODO money filter*@
-                            <span class="subTotal">{{deliveryOrderDetail.product.UnitPrice * deliveryOrderDetail.Qty | currency}}</span>
+                            <span class="subTotal">{{deliveryOrderDetail.Product.UnitPrice * deliveryOrderDetail.Qty | currency}}</span>
                         </td>
                     </tr>
                     <tr class="table_bottomRow">
                         <td colspan="5">
-                            <button ng-click="AddProduct()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                            <button ng-click="AddProduct()" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                         </td>
                         <td class="orderTotal">
-                            @*TODO money filter*@
                             總計：<span>{{getOrderTotalAmount() | currency}}</span>
                         </td>
                     </tr>
