@@ -1,5 +1,6 @@
 ﻿interface IYSService {
     PostDeliveryOrder(config: IDeliveryOrderConfig): ng.IPromise<any>;
+    GetCustomerList(): ng.IPromise<any>;
 }
 
 interface IYSConfig {
@@ -9,7 +10,11 @@ interface IYSConfig {
 interface IRespResult {
     IsSuccess: boolean,
     Data: any,
-    ErrMsg: string;
+    ErrorMessage: string;
+}
+
+interface IGetCustomerListRespResult extends IRespResult {
+    Customers: Array<Customer>
 }
 
 interface IDeliveryOrderRequest {
@@ -73,9 +78,9 @@ class Product {
             function ($http: ng.IHttpService, $q: ng.IQService, YSConfig: IYSConfig) {
                 var hostUrl: string = YSConfig.HostUrl;
                 var addDeliveryOrderUrl: string = `${hostUrl}/ajax/AddDeliveryOrder`;
+                var getCustomerListUrl: string = `${hostUrl}/ajax/GetCustomerList`;
 
                 function PostDeliveryOrder(config: IDeliveryOrderConfig) {
-                    debugger;
                     var deferred = $q.defer();
                     var opts = <ng.IRequestConfig>{
                         url: addDeliveryOrderUrl,
@@ -101,8 +106,36 @@ class Product {
                     return deferred.promise;
                 };
 
+                function GetCustomerList() {
+                    var deferred = $q.defer();
+                    var opts = <ng.IRequestConfig>{
+                        url: getCustomerListUrl,
+                        method: 'GET'
+                    };
+
+                    $http(opts).then(function (response) {
+                        var obj = <IGetCustomerListRespResult>response.data;
+                        var customerList: Array<Customer> = [];
+
+                        if (obj && obj.IsSuccess) {
+                            angular.forEach(obj.Customers, function (value: Customer, key) {
+                                customerList.push(value);
+                            });                            
+
+                            deferred.resolve(customerList);
+                        } else {
+                            deferred.reject('Data not found.');
+                        }
+                    }, function (response) {
+                        deferred.reject(response);
+                    });
+
+                    return deferred.promise;
+                }
+
                 return <IYSService>{
-                    PostDeliveryOrder
+                    PostDeliveryOrder,
+                    GetCustomerList
                 };
             }]);
 

@@ -28,8 +28,8 @@ var Product = (function () {
         function ($http, $q, YSConfig) {
             var hostUrl = YSConfig.HostUrl;
             var addDeliveryOrderUrl = hostUrl + "/ajax/AddDeliveryOrder";
+            var getCustomerListUrl = hostUrl + "/ajax/GetCustomerList";
             function PostDeliveryOrder(config) {
-                debugger;
                 var deferred = $q.defer();
                 var opts = {
                     url: addDeliveryOrderUrl,
@@ -51,8 +51,32 @@ var Product = (function () {
                 return deferred.promise;
             }
             ;
+            function GetCustomerList() {
+                var deferred = $q.defer();
+                var opts = {
+                    url: getCustomerListUrl,
+                    method: 'GET'
+                };
+                $http(opts).then(function (response) {
+                    var obj = response.data;
+                    var customerList = [];
+                    if (obj && obj.IsSuccess) {
+                        angular.forEach(obj.Customers, function (value, key) {
+                            customerList.push(value);
+                        });
+                        deferred.resolve(customerList);
+                    }
+                    else {
+                        deferred.reject('Data not found.');
+                    }
+                }, function (response) {
+                    deferred.reject(response);
+                });
+                return deferred.promise;
+            }
             return {
-                PostDeliveryOrder: PostDeliveryOrder
+                PostDeliveryOrder: PostDeliveryOrder,
+                GetCustomerList: GetCustomerList
             };
         }]);
 })(angular);

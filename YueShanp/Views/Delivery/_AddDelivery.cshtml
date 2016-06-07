@@ -15,14 +15,10 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                             <label>客戶名稱</label>
-                            <input type="text" class="form-control" list="customerNameList" required ng-model="selectCustomer" />
-                            @*TODO 客戶名稱驗證*@
-                            <datalist id="customerNameList">
-                                @foreach (var customer in customerList)
-                                {
-                                    <option value="@customer.Name"></option>
-                                }
-                            </datalist>
+                            <select class="form-control" 
+                                    ng-model="selectedCustomer"
+                                    ng-options="option.value as option.name for option in customerOptions">
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
@@ -76,7 +72,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="deliveryOrderDetail in DeliveryOrderDetailList">
+                    <tr ng-repeat="deliveryOrderDetail in deliveryOrderDetailList">
                         <td class="td_Operation">
                             <a ng-click="RemoveProduct($index)">
                                 <span class="fa-stack fa-1x">

@@ -1,43 +1,62 @@
-﻿//class DeliveryOrder {
-//    CustomerId: number;
-//    OrderNumber: number;
-//    DeliveryDate: string;
-//    AccountMonth: string;
-//    ProductList: Array<Product>; 
-//}
+﻿(function () {
+    class CustomerOption {
+        value: string;
+        name: string;
+    }
 
-(function () {
+    interface IAddDeliveryFactory {
+        GetCustomerOptions(customerList: Customer[])
+    }
+
+
     angular.module('mvcApp', ['ui.bootstrap', 'ServiceCommon', 'CommonHelper'])
-        .controller('addDeliveryCtrl', ['$scope', '$filter', 'YSService', '$window',
-            function ($scope, $filter, ysService: IYSService, $window: ng.IWindowService) {
+
+        .factory('addDeliveryFactory', function () {
+
+            function GetCustomerOptions(customerList: Customer[]) {
+                var options = new Array<CustomerOption>();
+                options.push({ value: '0', name: '選擇廠商' });
+                angular.forEach(customerList, function (value: Customer, key) {
+                    options.push({ value: value.Id.toString(), name: value.Name });
+                });
+                return options;
+            }
+
+            return <IAddDeliveryFactory>{
+                GetCustomerOptions
+            }
+        })
+
+        .controller('addDeliveryCtrl', ['$scope', '$filter', 'YSService', '$window', 'addDeliveryFactory',
+            function ($scope, $filter, ysService: IYSService, $window: ng.IWindowService, addDeliveryFactory: IAddDeliveryFactory) {
                 // FUNCTIONs
                 $scope.FormatDate = function (date) {
                     return $filter('date')(date, $scope.format);
                 };
                 $scope.AddProduct = function () {
-                    $scope.DeliveryOrderDetailList.push(new DeliveryOrderDetail(0, new Product(0, '', 0)));
+                    $scope.deliveryOrderDetailList.push(new DeliveryOrderDetail(0, new Product(0, '', 0)));
                 };
 
-                // TODO this has bug, why I can't get the damm product's unit price
                 $scope.getOrderTotalAmount = function () {
                     let result = 0;
-                    $scope.DeliveryOrderDetailList.forEach(function (entry: DeliveryOrderDetail) {
+                    $scope.deliveryOrderDetailList.forEach(function (entry: DeliveryOrderDetail) {
                         result += entry.Product.UnitPrice * entry.Qty;
                     });
 
                     return result;
                 };
+
                 $scope.SavePrint = function () {
-                    var customerId = $scope.customerId;
+                    //var customerId = $scope.customerId;
                     var customerSONumber = $scope.CustomerSONumber;
                     var deliveryOrderDate = $scope.deliveryDate;
                     var deliveryOrderNumber = $scope.deliveryOrderNumber;
                     var receivableMonth = $scope.accountMonth;
-                    var deliveryOrderDetailList = $scope.DeliveryOrderDetailList;
+                    var deliveryOrderDetailList = $scope.deliveryOrderDetailList;
 
                     var config = <IDeliveryOrderConfig>{
                         data: {
-                            Customer: new Customer(customerId),
+                            Customer: new Customer($scope.selectedCustomer),
                             CustomerSONumber: customerSONumber,
                             DeliveryOrderDate: deliveryOrderDate,
                             DeliveryOrderNumber: deliveryOrderNumber,
@@ -45,7 +64,6 @@
                             DeliveryOrderDetailList: deliveryOrderDetailList
                         }
                     };
-                    debugger;
                     ysService.PostDeliveryOrder(config);
                     $scope.isSaved = true;
 
@@ -54,22 +72,23 @@
 
 
                 $scope.RemoveProduct = function (index) {
-                    $scope.DeliveryOrderDetailList.splice(index, 1);
+                    $scope.deliveryOrderDetailList.splice(index, 1);
                 };
 
                 // ATTRIBUTEs
                 $scope.format = 'yyyy/MM/dd';
 
                 // MODELs
-                $scope.selectCustomer = '';
+                //$scope.selectedCustomer = 0;
                 $scope.deliveryOrderNumber;
                 $scope.deliveryDate = $scope.FormatDate(new Date());
                 $scope.accountMonth = '';
-                $scope.DeliveryOrderDetailList = new Array<DeliveryOrderDetail>();
-                // TODO remove this in DeliveryOrderDetail
-                //$scope.ProductList = new Array<Product>();
-                $scope.customerId = '';
-
+                $scope.deliveryOrderDetailList = new Array<DeliveryOrderDetail>();
+                $scope.customerList = ysService.GetCustomerList().then(
+                    function (data: Array<Customer>) {
+                        $scope.customerOptions = addDeliveryFactory.GetCustomerOptions(data);
+                        $scope.selectedCustomer = $scope.customerOptions[0].value;
+                    });
 
                 ////Show warning message if user leave page ---------------------------------------------------------------////
                 $scope.$watch('drform.$dirty', function (value) {

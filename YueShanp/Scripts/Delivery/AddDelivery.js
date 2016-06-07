@@ -1,39 +1,49 @@
-//class DeliveryOrder {
-//    CustomerId: number;
-//    OrderNumber: number;
-//    DeliveryDate: string;
-//    AccountMonth: string;
-//    ProductList: Array<Product>; 
-//}
 (function () {
+    var CustomerOption = (function () {
+        function CustomerOption() {
+        }
+        return CustomerOption;
+    })();
     angular.module('mvcApp', ['ui.bootstrap', 'ServiceCommon', 'CommonHelper'])
-        .controller('addDeliveryCtrl', ['$scope', '$filter', 'YSService', '$window',
-        function ($scope, $filter, ysService, $window) {
+        .factory('addDeliveryFactory', function () {
+        function GetCustomerOptions(customerList) {
+            var options = new Array();
+            options.push({ value: '0', name: '選擇廠商' });
+            angular.forEach(customerList, function (value, key) {
+                options.push({ value: value.Id.toString(), name: value.Name });
+            });
+            return options;
+        }
+        return {
+            GetCustomerOptions: GetCustomerOptions
+        };
+    })
+        .controller('addDeliveryCtrl', ['$scope', '$filter', 'YSService', '$window', 'addDeliveryFactory',
+        function ($scope, $filter, ysService, $window, addDeliveryFactory) {
             // FUNCTIONs
             $scope.FormatDate = function (date) {
                 return $filter('date')(date, $scope.format);
             };
             $scope.AddProduct = function () {
-                $scope.DeliveryOrderDetailList.push(new DeliveryOrderDetail(0, new Product(0, '', 0)));
+                $scope.deliveryOrderDetailList.push(new DeliveryOrderDetail(0, new Product(0, '', 0)));
             };
-            // TODO this has bug, why I can't get the damm product's unit price
             $scope.getOrderTotalAmount = function () {
                 var result = 0;
-                $scope.DeliveryOrderDetailList.forEach(function (entry) {
+                $scope.deliveryOrderDetailList.forEach(function (entry) {
                     result += entry.Product.UnitPrice * entry.Qty;
                 });
                 return result;
             };
             $scope.SavePrint = function () {
-                var customerId = $scope.customerId;
+                //var customerId = $scope.customerId;
                 var customerSONumber = $scope.CustomerSONumber;
                 var deliveryOrderDate = $scope.deliveryDate;
                 var deliveryOrderNumber = $scope.deliveryOrderNumber;
                 var receivableMonth = $scope.accountMonth;
-                var deliveryOrderDetailList = $scope.DeliveryOrderDetailList;
+                var deliveryOrderDetailList = $scope.deliveryOrderDetailList;
                 var config = {
                     data: {
-                        Customer: new Customer(customerId),
+                        Customer: new Customer($scope.selectedCustomer),
                         CustomerSONumber: customerSONumber,
                         DeliveryOrderDate: deliveryOrderDate,
                         DeliveryOrderNumber: deliveryOrderNumber,
@@ -41,25 +51,25 @@
                         DeliveryOrderDetailList: deliveryOrderDetailList
                     }
                 };
-                debugger;
                 ysService.PostDeliveryOrder(config);
                 $scope.isSaved = true;
                 // TODO 修改 MODAL 由 SERVICE 取值，或者先將資料記載臨時資料區
             };
             $scope.RemoveProduct = function (index) {
-                $scope.DeliveryOrderDetailList.splice(index, 1);
+                $scope.deliveryOrderDetailList.splice(index, 1);
             };
             // ATTRIBUTEs
             $scope.format = 'yyyy/MM/dd';
             // MODELs
-            $scope.selectCustomer = '';
+            //$scope.selectedCustomer = 0;
             $scope.deliveryOrderNumber;
             $scope.deliveryDate = $scope.FormatDate(new Date());
             $scope.accountMonth = '';
-            $scope.DeliveryOrderDetailList = new Array();
-            // TODO remove this in DeliveryOrderDetail
-            //$scope.ProductList = new Array<Product>();
-            $scope.customerId = '';
+            $scope.deliveryOrderDetailList = new Array();
+            $scope.customerList = ysService.GetCustomerList().then(function (data) {
+                $scope.customerOptions = addDeliveryFactory.GetCustomerOptions(data);
+                $scope.selectedCustomer = $scope.customerOptions[0].value;
+            });
             ////Show warning message if user leave page ---------------------------------------------------------------////
             $scope.$watch('drform.$dirty', function (value) {
                 if (value && !$scope.isSaved) {
