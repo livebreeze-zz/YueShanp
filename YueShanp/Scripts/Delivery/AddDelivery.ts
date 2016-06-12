@@ -30,6 +30,10 @@
         .controller('addDeliveryCtrl', ['$scope', '$filter', 'YSService', '$window', 'addDeliveryFactory',
             function ($scope, $filter, ysService: IYSService, $window: ng.IWindowService, addDeliveryFactory: IAddDeliveryFactory) {
                 // FUNCTIONs
+                $scope.PrePrintClick = function() {
+                    let prePrintDeliveryOrderUrl = '//localhost:11074/Delivery/PrePrintDeliveryOrder?DONumber=' + $scope.deliveryOrderNumber;
+                    $window.open(prePrintDeliveryOrderUrl, 'DeliveryPrint', 'height=800,width=800');
+                }
                 $scope.FormatDate = function (date) {
                     return $filter('date')(date, $scope.format);
                 };

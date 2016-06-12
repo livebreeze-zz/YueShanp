@@ -92,7 +92,8 @@
                             </datalist>
                         </td>
                         <td class="td_unitPrice">
-                            <input type="number" class="form-control input-sm" value="" ng-model="deliveryOrderDetail.Product.UnitPrice" />
+                            {{deliveryOrderDetail.Product.UnitPrice}}
+                            @*<input type="number" class="form-control input-sm" value="" ng-model="deliveryOrderDetail.Product.UnitPrice" />*@
                         </td>
                         <td class="td_qty">
                             <input type="number" class="form-control input-sm" min="1" max="9999" maxlength="4" ng-model="deliveryOrderDetail.Qty" />
@@ -116,7 +117,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="pull-right">
-                    <a href="@Url.Action(nameof(DeliveryController.ModalPrePrintDeliveryOrder))" ng-click="SavePrint()" class="btn btn-primary" data-toggle="modal" data-target="#ModalPrePrintDeliveryOrder">儲存並預覽</a>
+                    <a href="#"
+                       class="btn btn-primary"
+                       ng-click="PrePrintClick()">
+                        儲存並列印
+                    </a>@*ng-click="SavePrint()"*@
                     <button class="btn btn-primary">儲存</button>
                     <button class="btn btn-primary">儲存並新增</button>
                     <a href="@Url.Action(nameof(CustomerController.CustomerIndex), nameof(CustomerController).Substring(0, nameof(CustomerController).Length - 10))" class="btn btn-default">取消並返回客戶管理</a>

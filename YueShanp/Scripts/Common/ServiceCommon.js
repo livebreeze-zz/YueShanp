@@ -3,14 +3,14 @@ var Customer = (function () {
         this.Id = id;
     }
     return Customer;
-})();
+}());
 var DeliveryOrderDetail = (function () {
     function DeliveryOrderDetail(qty, product) {
         this.Qty = qty;
         this.Product = product;
     }
     return DeliveryOrderDetail;
-})();
+}());
 var Product = (function () {
     function Product(productId, productName, unitPrice) {
         this.ProductId = productId;
@@ -18,7 +18,7 @@ var Product = (function () {
         this.UnitPrice = unitPrice;
     }
     return Product;
-})();
+}());
 (function (angular) {
     angular.module('ServiceCommon', [])
         .constant('YSConfig', {

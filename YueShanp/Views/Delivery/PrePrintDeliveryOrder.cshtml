@@ -1,0 +1,58 @@
+﻿@using YueShanp.Models
+
+@{
+    Layout = null;
+}
+
+@model PrePrintDeliveryOrderViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Print Delivery Order</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tbody>
+                <!--td*5-->
+            <tr>
+                <td colspan="4">@Model.CustomerName</td>
+                <td>@this.GetPrintOrderROCDateString(Model.DeliveryOrderDate)</td>
+            </tr>
+                @foreach (var orderDetail in Model.DeliveryOrderDetailList)
+                {
+                    var productName = orderDetail.Product.Name;
+                    var qty = orderDetail.Qty;
+                    var deliveryUnitPrice = orderDetail.DeliveryUnitPrice;
+                    var subTotal = qty*deliveryUnitPrice;
+
+                    <tr>
+                        <td>@productName</td>
+                        <td>@qty</td>
+                        <td>@deliveryUnitPrice.ToString("0,0.0")</td>
+                        <td>@subTotal.ToString("0,0")</td>
+                    </tr>
+                }
+            <tr class="total-amount">
+                <td class="total-amount">總計: @Model.TotalAmount.ToString("0,0")</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+@functions{
+
+    private string GetPrintOrderROCDateString(DateTime date)
+    {
+        var rocYear = date.Year - 1911;
+
+        return string.Format("{0}  {1}   {2}", rocYear, date.Month, date.Day);
+    }
+
+}

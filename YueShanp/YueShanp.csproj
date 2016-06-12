@@ -218,6 +218,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Filter\WebAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -239,6 +240,7 @@
     <Compile Include="Models\Interface\IProductRepository.cs" />
     <Compile Include="Models\ViewModels\Delivery\AddDelivery.cs" />
     <Compile Include="Models\ViewModels\Delivery\DeliveryIndexViewModel.cs" />
+    <Compile Include="Models\ViewModels\Delivery\PrePrintDeliveryOrderViewModel.cs" />
     <Compile Include="Models\ViewModels\Manage\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Repository\DeliveryRepository.cs" />
@@ -365,6 +367,7 @@
     <Content Include="Views\Delivery\DeliveryIndex.cshtml" />
     <Content Include="Views\Delivery\_AddDelivery.cshtml" />
     <Content Include="Views\Delivery\ModalPrePrintDeliveryOrder.cshtml" />
+    <Content Include="Views\Delivery\PrePrintDeliveryOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

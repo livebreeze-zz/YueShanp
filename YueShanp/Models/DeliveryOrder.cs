@@ -27,5 +27,7 @@ namespace YueShanp.Models
 
         public virtual List<DeliveryOrderDetail> DeliveryOrderDetailList { get; set; }
 
+        public decimal TotalAmount { get; set; }
+
     }
 }
