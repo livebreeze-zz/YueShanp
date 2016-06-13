@@ -217,6 +217,7 @@
     <Compile Include="Controllers\DeliveryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ModalController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Filter\WebAuthorizeAttribute.cs" />
@@ -310,6 +311,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Views\Modal\ModalAddProduct.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

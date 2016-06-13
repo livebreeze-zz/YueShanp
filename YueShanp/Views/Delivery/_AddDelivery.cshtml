@@ -50,7 +50,11 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         @*<button type="button" role="button" class="btn btn-default">尋找其他送貨單</button>*@
-                        <button type="button" role="button" class="btn btn-default">新增品項</button>
+                        <a href="@Url.Action("ModalAddProduct", "Modal")" 
+                           class="btn btn-default"
+                           data-toggle="modal"
+                           data-target="#modal-add-product"
+                           >新增品項</a>
                         <button type="button" role="button" class="btn btn-default">新增客戶</button>
                     </div>
                 </div>

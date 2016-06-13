@@ -3,7 +3,7 @@
         function CustomerOption() {
         }
         return CustomerOption;
-    }());
+    })();
     angular.module('mvcApp', ['ui.bootstrap', 'ServiceCommon', 'CommonHelper'])
         .factory('addDeliveryFactory', function () {
         function GetCustomerOptions(customerList) {
