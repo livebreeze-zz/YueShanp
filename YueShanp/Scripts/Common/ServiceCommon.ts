@@ -72,6 +72,7 @@ class Product {
     angular.module('ServiceCommon', [])
         .constant('YSConfig', <IYSConfig>{
             HostUrl: 'http://localhost:11074'
+            //HostUrl: 'http://59.126.180.155'
         })
 
         .factory('YSService', ['$http', '$q', 'YSConfig',

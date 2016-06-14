@@ -46,6 +46,7 @@ namespace YueShanp.Controllers
             return View(deliveryOrders.ToList());
         }
 
+        [AllowAnonymous]
         public ActionResult PrePrintDeliveryOrder(string doNumber)
         {
             var delivery = this.deliveryRepository.Get(doNumber.ToInt());

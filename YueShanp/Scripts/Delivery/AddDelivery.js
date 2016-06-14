@@ -3,7 +3,7 @@
         function CustomerOption() {
         }
         return CustomerOption;
-    })();
+    }());
     angular.module('mvcApp', ['ui.bootstrap', 'ServiceCommon', 'CommonHelper'])
         .factory('addDeliveryFactory', function () {
         function GetCustomerOptions(customerList) {
@@ -22,7 +22,7 @@
         function ($scope, $filter, ysService, $window, addDeliveryFactory) {
             // FUNCTIONs
             $scope.PrePrintClick = function () {
-                var prePrintDeliveryOrderUrl = '//localhost:11074/Delivery/PrePrintDeliveryOrder?DONumber=' + $scope.deliveryOrderNumber;
+                var prePrintDeliveryOrderUrl = '/Delivery/PrePrintDeliveryOrder?DONumber=' + $scope.deliveryOrderNumber;
                 $window.open(prePrintDeliveryOrderUrl, 'DeliveryPrint', 'height=800,width=800');
             };
             $scope.FormatDate = function (date) {

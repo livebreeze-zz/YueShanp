@@ -15,7 +15,8 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                             <label>客戶名稱</label>
-                            <select class="form-control" 
+                            <select id="sct_CustomerList"
+                                    class="form-control" 
                                     ng-model="selectedCustomer"
                                     ng-options="option.value as option.name for option in customerOptions">
                             </select>
@@ -40,7 +41,7 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                             <label>帳款月份</label>
-                            <input type="number" class="form-control" value="" placeholder="10505" required ng-model="accountMonth" />
+                            <input type="text" class="form-control" value="@(DateTime.Now.ROCYear() + DateTime.Now.ToString("MM"))" maxlength="5" placeholder="10505" required ng-model="accountMonth" />
                         </div>
                     </div>
                 </div>

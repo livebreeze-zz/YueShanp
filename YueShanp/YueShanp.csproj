@@ -219,6 +219,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModalController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Extensions\CommonExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Filter\WebAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -373,6 +374,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Enum\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
