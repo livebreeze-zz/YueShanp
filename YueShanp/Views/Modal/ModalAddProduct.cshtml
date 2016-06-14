@@ -1,4 +1,4 @@
-﻿@using YueShanp.Models 
+﻿@using YueShanp.Models
 
 @model Product
 
@@ -12,21 +12,38 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="ModalPrePrintDeliveryOrderLabel">新增品項</h4>
+            <h4 class="modal-title" id="ModalPrePrintDeliveryOrderLabel">新增/更新 品項</h4>
         </div>
         <div class="modal-body">
             <form class="form-list" role="form">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-lg-12">
+                        <h3>黃龍</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <div class="form-label">@Html.DisplayNameFor(model => model.Name)</div>
                             <div class="form-content">
                                 <div class="form-box">
-                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })                                    
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", list = "dl-product" })
+                                    <datalist id="dl-product">
+                                        @*TODO 客戶商品名單*@
+                                        <option>測試商品1</option>
+                                        <option>測試商品2</option>
+                                        <option>測試商品3</option>
+                                    </datalist>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <div class="form-label">@Html.DisplayNameFor(model => model.UnitPrice)</div>
+                            @Html.TextBoxFor(model => model.UnitPrice, new { @class = "form-control", type = "number" })
+                        </div>
+                    </div>                    
                 </div>
             </form>
         </div>

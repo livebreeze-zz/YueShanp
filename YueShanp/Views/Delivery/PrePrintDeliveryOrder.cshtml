@@ -12,6 +12,15 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Print Delivery Order</title>
+    <style>
+        @@media print {
+            .btn {
+                display: none;
+            }
+        }
+
+       
+    </style>
 </head>
 <body>
     <div>
@@ -41,6 +50,9 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div>
+        <button type="button" class="btn btn-default" onclick="print();">列印</button>
     </div>
 </body>
 </html>
