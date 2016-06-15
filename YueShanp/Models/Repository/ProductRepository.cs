@@ -61,9 +61,14 @@ namespace YueShanp.Models
             }
         }
 
-        public Product Get(int ProductId)
+        public Product Get(int productId)
         {
-            return db.Products.Find(ProductId);
+            return db.Products.Find(productId);
+        }
+
+        public Product Get(string productName)
+        {
+            return db.Products.FirstOrDefault(x => x.Name.EqualsIgnoreCase(productName));
         }
 
         public IQueryable<Product> GetAll(int customerId)

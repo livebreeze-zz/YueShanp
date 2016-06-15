@@ -4,9 +4,11 @@
 
 @{
     Layout = null;
+    var customer = (Customer)ViewBag.Customer;
+    var products = List<Product>ViewBag.Products;
 }
 
-<div class="modal-dialog" role="document" ng-controller="_ModalAddProduct">
+<div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -16,9 +18,10 @@
         </div>
         <div class="modal-body">
             <form class="form-list" role="form">
+                @Html.HiddenFor(model => model.Customer.Id, new object { Value = customer.Id })
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3>黃龍</h3>
+                        <h3>@customer.Name</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -29,10 +32,11 @@
                                 <div class="form-box">
                                     @Html.TextBoxFor(model => model.Name, new { @class = "form-control", list = "dl-product" })
                                     <datalist id="dl-product">
-                                        @*TODO 客戶商品名單*@
-                                        <option>測試商品1</option>
-                                        <option>測試商品2</option>
-                                        <option>測試商品3</option>
+                                        @foreach (var product in products)
+                                        {
+                                            var productName = product.Name;
+                                            <option>@productName</option>
+                                        }
                                     </datalist>
                                 </div>
                             </div>
@@ -53,3 +57,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    (function ($) {
+        var modal = $('#modal-add-product');
+
+        modal.on("hidden.bs.modal", function () {
+            jQuery(this).html("");
+            jQuery(this).removeData('bs.modal')
+        });
+
+    })(jQuery)
+</script>

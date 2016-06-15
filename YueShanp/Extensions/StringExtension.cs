@@ -14,5 +14,10 @@ namespace YueShanp
 
             return r == 0 ? defaultInt : r;
         }
+
+        public static bool EqualsIgnoreCase(this string source, string target)
+        {
+            return string.Equals(source, target, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

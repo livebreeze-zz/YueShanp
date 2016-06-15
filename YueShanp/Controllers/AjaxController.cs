@@ -16,6 +16,7 @@ namespace YueShanp.Controllers
         private const string ISSUCCESS = "IsSuccess";
         private const string ERRORMESSAGE = "ErrorMessage";
         private const string VALIDATIONERRORMESSAGE = "validation error!";
+        private const string SERVERERROR = "Internal server error!";
         private const string CUSTOMERS = "Customers";
         #endregion
 
@@ -73,5 +74,41 @@ namespace YueShanp.Controllers
 
             return Json(this.responseDic);
         }
+
+        [HttpPost]
+        public JsonResult QuickUpdateProduct([Bind(Include = "Name,UnitPrice,Customer")]Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                this.responseDic[ERRORMESSAGE] = VALIDATIONERRORMESSAGE;
+                return Json(this.responseDic);
+            }
+
+            var productInDB = this.productRepository.Get(product.Name);
+            product.Customer = this.customerRepository.Get(product.Customer.Id);
+
+            try
+            {
+                if (productInDB == null)
+                {
+                    EntityHelper<Product>.CreateBaseEntity(product, User.Identity.Name);
+                    this.productRepository.CreateProductQuoted(product);
+                }
+                else
+                {
+
+                    EntityHelper<Product>.EditBaseEntity(product, User.Identity.Name);
+                    this.productRepository.Update(product);
+                }
+
+                this.responseDic[ISSUCCESS] = true;
+            }
+            catch
+            {
+                this.responseDic[ERRORMESSAGE] = SERVERERROR;
+            }
+
+            return Json(this.responseDic);
+        }       
     }
 }
