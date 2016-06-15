@@ -28,6 +28,10 @@ namespace YueShanp
                       "~/Scripts/angular-ui/ui-bootstrap.min.js",
                       "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/common").Include(
+                   "~/Scripts/Common/framework.js"
+               ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",

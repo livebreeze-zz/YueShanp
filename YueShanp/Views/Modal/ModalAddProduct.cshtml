@@ -4,8 +4,8 @@
 
 @{
     Layout = null;
-    var customer = (Customer)ViewBag.Customer;
-    var products = List<Product>ViewBag.Products;
+    var customer = Model.Customer;
+    var products = (List<Product>)ViewBag.Products;
 }
 
 <div class="modal-dialog" role="document">
@@ -17,8 +17,11 @@
             <h4 class="modal-title" id="ModalPrePrintDeliveryOrderLabel">新增/更新 品項</h4>
         </div>
         <div class="modal-body">
+            <div class="alert"></div>
             <form class="form-list" role="form">
-                @Html.HiddenFor(model => model.Customer.Id, new object { Value = customer.Id })
+                @Html.HiddenFor(model => model.Customer.Id)
+                @Html.HiddenFor(model => model.Customer.Name)
+                @Html.HiddenFor(model => model.Customer.Phone)
                 <div class="row">
                     <div class="col-lg-12">
                         <h3>@customer.Name</h3>
@@ -47,25 +50,15 @@
                             <div class="form-label">@Html.DisplayNameFor(model => model.UnitPrice)</div>
                             @Html.TextBoxFor(model => model.UnitPrice, new { @class = "form-control", type = "number" })
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary">新增</button>
+            <button type="button" class="btn btn-primary btn-submit">新增</button>
         </div>
     </div>
 </div>
 
-<script>
-    (function ($) {
-        var modal = $('#modal-add-product');
-
-        modal.on("hidden.bs.modal", function () {
-            jQuery(this).html("");
-            jQuery(this).removeData('bs.modal')
-        });
-
-    })(jQuery)
-</script>
+<script src="~/Scripts/Modal/ModalAddProduct.js"></script>

@@ -8,7 +8,6 @@ namespace YueShanp.Models
     public class Product : BaseEntity<int>
     {
         [Required]
-        [Index("ProductNameIndex", IsUnique = true)]
         [DisplayName("名稱")]
         public string Name { get; set; }
 

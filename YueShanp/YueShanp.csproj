@@ -389,9 +389,11 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Common\CommonHelper.ts" />
+    <TypeScriptCompile Include="Scripts\Common\framework.ts" />
     <TypeScriptCompile Include="Scripts\Common\ServiceCommon.ts" />
     <TypeScriptCompile Include="Scripts\Delivery\AddDelivery.ts" />
     <TypeScriptCompile Include="Scripts\Delivery\DeliveryIndex.ts" />
+    <TypeScriptCompile Include="Scripts\Modal\ModalAddProduct.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

@@ -29,12 +29,9 @@ namespace YueShanp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
 
-            var products = this.productRepository.GetAll(customer.Id);
+            ViewBag.Products = this.productRepository.GetAll(customer.Id).ToList();
 
-            ViewBag.Customer = customer;
-            ViewBag.Products = products;
-
-            return View();
+            return View(new Product() { Customer = customer });
         }
     }
 }
