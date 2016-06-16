@@ -14,10 +14,13 @@ namespace YueShanp.Controllers
 
         #region const
         private const string ISSUCCESS = "IsSuccess";
+
         private const string ERRORMESSAGE = "ErrorMessage";
         private const string VALIDATIONERRORMESSAGE = "validation error!";
         private const string SERVERERROR = "Internal server error!";
+
         private const string CUSTOMERS = "Customers";
+        private const string PRODUCTS = "Products";
         #endregion
 
         private Dictionary<string, object> responseDic = new Dictionary<string, object>()
@@ -33,11 +36,13 @@ namespace YueShanp.Controllers
             this.deliveryRepository = new DeliveryRepository();
         }
 
-        public JsonResult GetProductList(int customerId)
+        public JsonResult GetProductList(int Id)
         {
-            var productList = this.productRepository.GetAll(customerId);
+            var productList = this.productRepository.GetAll((int)Id);
 
-            return Json(productList);
+            this.responseDic[ISSUCCESS] = true;
+            this.responseDic.Add(PRODUCTS, productList);
+            return Json(this.responseDic, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetCustomerList()
@@ -96,15 +101,15 @@ namespace YueShanp.Controllers
                 }
                 else
                 {
-
-                    EntityHelper<Product>.EditBaseEntity(product, User.Identity.Name);
-                    this.productRepository.Update(product);
+                    EntityHelper<Product>.EditBaseEntity(productInDB, User.Identity.Name);
+                    this.productRepository.Update(productInDB);
                 }
 
                 this.responseDic[ISSUCCESS] = true;
             }
-            catch
+            catch (Exception ex)
             {
+                // TODO add log
                 this.responseDic[ERRORMESSAGE] = SERVERERROR;
             }
 

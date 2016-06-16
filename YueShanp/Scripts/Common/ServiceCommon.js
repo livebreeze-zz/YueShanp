@@ -29,6 +29,7 @@ var Product = (function () {
             var hostUrl = YSConfig.HostUrl;
             var addDeliveryOrderUrl = hostUrl + "/ajax/AddDeliveryOrder";
             var getCustomerListUrl = hostUrl + "/ajax/GetCustomerList";
+            var getProductListUrl = hostUrl + "/ajax/GetProductList";
             function PostDeliveryOrder(config) {
                 var deferred = $q.defer();
                 var opts = {
@@ -74,9 +75,33 @@ var Product = (function () {
                 });
                 return deferred.promise;
             }
+            function GetProductList(customerId) {
+                var deferred = $q.defer();
+                var opts = {
+                    url: getProductListUrl + '/' + customerId,
+                    method: 'GET'
+                };
+                $http(opts).then(function (response) {
+                    var obj = response.data;
+                    var productList = [];
+                    if (obj && obj.IsSuccess) {
+                        angular.forEach(obj.Products, function (value, key) {
+                            productList.push(value);
+                        });
+                        deferred.resolve(productList);
+                    }
+                    else {
+                        deferred.reject('Data not found.');
+                    }
+                }, function (response) {
+                    deferred.reject(response);
+                });
+                return deferred.promise;
+            }
             return {
                 PostDeliveryOrder: PostDeliveryOrder,
-                GetCustomerList: GetCustomerList
+                GetCustomerList: GetCustomerList,
+                GetProductList: GetProductList
             };
         }]);
 })(angular);

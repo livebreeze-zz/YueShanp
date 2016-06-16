@@ -16,10 +16,10 @@
                         <div class="form-group">
                             <label>客戶名稱</label>
                             <select id="sct_CustomerList"
-                                    class="form-control" 
+                                    class="form-control"
                                     ng-model="selectedCustomer"
-                                    ng-options="option.value as option.name for option in customerOptions">
-                            </select>
+                                    ng-options="option.value as option.name for option in customerOptions"
+                                    ng-change="ResetProductList()"></select>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
@@ -55,8 +55,7 @@
                            ng-disabled="selectedCustomer == 0"
                            class="btn btn-default"
                            data-toggle="modal"
-                           data-target="#modal-add-product"
-                           >新增品項</a>
+                           data-target="#modal-add-product">新增品項</a>
                         <button type="button" role="button" class="btn btn-default">新增客戶</button>
                     </div>
                 </div>
@@ -89,13 +88,6 @@
                         <td class="td_index">{{$index +1}}</td>
                         <td class="td_productName">
                             <input type="text" class="form-control input-sm" list="productNameList" ng-model="deliveryOrderDetail.Product.ProductName" />
-                            <datalist id="productNameList">
-                                @*TODO repeater*@
-                                <option value="EB212004 AMP插座4P  1-178314-2(9.2)"></option>
-                                <option value="EV749A00  112cm (05.04)"></option>
-                                <option value="EB222010 AMP插座1-178288-8(03.09)"></option>
-                                <option value="EB242020 AMP插座 178289-8 (9.2)"></option>
-                            </datalist>
                         </td>
                         <td class="td_unitPrice">
                             {{deliveryOrderDetail.Product.UnitPrice}}
@@ -137,3 +129,8 @@
         </div>
     </form>
 </div>
+
+<!-- datalist -->
+<datalist id="productNameList">
+    <option ng-repeat="product in productList">{{product.Name}}</option>
+</datalist>

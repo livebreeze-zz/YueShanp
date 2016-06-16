@@ -42,7 +42,7 @@ namespace YueShanp.Models
             }
             else
             {
-                //db.Entry(instance.Customer).State = EntityState.Unchanged;
+                db.Entry(instance.Customer).State = EntityState.Unchanged;
                 db.Entry(instance).State = EntityState.Modified;
                 this.SaveChanges();
             }
@@ -68,7 +68,7 @@ namespace YueShanp.Models
 
         public Product Get(string productName)
         {
-            return db.Products.FirstOrDefault(x => x.Name.EqualsIgnoreCase(productName));
+            return db.Products.ToList().Where(x => x.Name.EqualsIgnoreCase(productName)).FirstOrDefault();
         }
 
         public IQueryable<Product> GetAll(int customerId)

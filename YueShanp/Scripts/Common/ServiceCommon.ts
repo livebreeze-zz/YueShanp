@@ -1,6 +1,7 @@
 ﻿interface IYSService {
     PostDeliveryOrder(config: IDeliveryOrderConfig): ng.IPromise<any>;
     GetCustomerList(): ng.IPromise<any>;
+    GetProductList(customerId: number): ng.IPromise<any>;
 }
 
 interface IYSConfig {
@@ -15,6 +16,10 @@ interface IRespResult {
 
 interface IGetCustomerListRespResult extends IRespResult {
     Customers: Array<Customer>
+}
+
+interface IGetProductListRespResult extends IRespResult {
+    Products: Array<Product>
 }
 
 interface IDeliveryOrderRequest {
@@ -80,6 +85,7 @@ class Product {
                 var hostUrl: string = YSConfig.HostUrl;
                 var addDeliveryOrderUrl: string = `${hostUrl}/ajax/AddDeliveryOrder`;
                 var getCustomerListUrl: string = `${hostUrl}/ajax/GetCustomerList`;
+                var getProductListUrl: string = `${hostUrl}/ajax/GetProductList`;
 
                 function PostDeliveryOrder(config: IDeliveryOrderConfig) {
                     var deferred = $q.defer();
@@ -134,9 +140,37 @@ class Product {
                     return deferred.promise;
                 }
 
+                function GetProductList(customerId: number) {
+                    var deferred = $q.defer();
+                    var opts = <ng.IRequestConfig>{
+                        url: getProductListUrl + '/' + customerId,
+                        method: 'GET'
+                    };
+
+                    $http(opts).then(function (response) {
+                        var obj = <IGetProductListRespResult>response.data;
+                        var productList: Array<Product> = [];
+
+                        if (obj && obj.IsSuccess) {
+                            angular.forEach(obj.Products, function (value: Product, key) {
+                                productList.push(value);
+                            });                            
+
+                            deferred.resolve(productList);
+                        } else {
+                            deferred.reject('Data not found.');
+                        }
+                    }, function (response) {
+                        deferred.reject(response);
+                    });
+
+                    return deferred.promise;
+                }
+
                 return <IYSService>{
                     PostDeliveryOrder,
-                    GetCustomerList
+                    GetCustomerList,
+                    GetProductList
                 };
             }]);
 

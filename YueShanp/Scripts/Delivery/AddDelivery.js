@@ -62,6 +62,10 @@
             $scope.RemoveProduct = function (index) {
                 $scope.deliveryOrderDetailList.splice(index, 1);
             };
+            $scope.ResetProductList = function () {
+                debugger;
+                $scope.productList = ysService.GetProductList($scope.selectedCustomer || 0);
+            };
             // ATTRIBUTEs
             $scope.format = 'yyyy/MM/dd';
             // MODELs
@@ -74,6 +78,8 @@
                 $scope.customerOptions = addDeliveryFactory.GetCustomerOptions(data);
                 $scope.selectedCustomer = $scope.customerOptions[0].value;
             });
+            //$scope.productList = ysService.GetProductList($scope.selectedCustomer || 0);
+            $scope.productList = new Array();
             ////Show warning message if user leave page ---------------------------------------------------------------////
             $scope.$watch('drform.$dirty', function (value) {
                 if (value && !$scope.isSaved) {
