@@ -212,9 +212,9 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 # Auto generate .js and .map files
-Scripts/Common/**/*.js
-Scripts/Common/**/*.map
-Scripts/Delivery/**/*.js
-Scripts/Delivery/**/*.map
-Scripts/Modal/**/*.js
-Scripts/Modal/**/*.map
+Scripts/Common/*.js
+Scripts/Common/*.map
+Scripts/Delivery/*.js
+Scripts/Delivery/*.map
+Scripts/Modal/*.js
+Scripts/Modal/*.map

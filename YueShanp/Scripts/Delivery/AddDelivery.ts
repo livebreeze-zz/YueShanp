@@ -30,7 +30,7 @@
         .controller('addDeliveryCtrl', ['$scope', '$filter', 'YSService', '$window', 'addDeliveryFactory',
             function ($scope, $filter, ysService: IYSService, $window: ng.IWindowService, addDeliveryFactory: IAddDeliveryFactory) {
                 // FUNCTIONs
-                $scope.PrePrintClick = function() {
+                $scope.PrePrintClick = function () {
                     let prePrintDeliveryOrderUrl = '/Delivery/PrePrintDeliveryOrder?DONumber=' + $scope.deliveryOrderNumber;
                     $window.open(prePrintDeliveryOrderUrl, 'DeliveryPrint', 'height=800,width=800');
                 }
@@ -80,8 +80,9 @@
                 };
 
                 $scope.ResetProductList = function () {
-                    debugger;
-                    $scope.productList = ysService.GetProductList($scope.selectedCustomer || 0);
+                    ysService.GetProductList($scope.selectedCustomer || 0).then(function (data) {
+                        $scope.productList = data;
+                    });
                 };
 
 

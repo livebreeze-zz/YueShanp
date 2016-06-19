@@ -30,6 +30,9 @@
             .done(function (data) {
                 if (data && data.IsSuccess) {
                     _alert.addClass('alert-success').html('<strong>DONE!</strong> 新增/修改商品完成').fadeIn();
+                    setTimeout(function () {
+                        _modal.modal('hide');
+                    }, 1000)
                 } else {
                     _alert.addClass('alert-danger').html('<strong>ERROR!</strong> ' + data.ErrorMessage).fadeIn();
                 }
