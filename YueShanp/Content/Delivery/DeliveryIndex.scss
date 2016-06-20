@@ -1,7 +1,9 @@
-﻿$navTabBottom: 15px;
+﻿$navTabTop: 20px;
+$navTabBottom: 15px;
 $orderTotalLeftAlign: -30px;
 
 .nav-tabs {
+    margin-top: $navTabTop;
     margin-bottom: $navTabBottom;
 }
 
