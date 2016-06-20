@@ -62,12 +62,12 @@ class DeliveryOrderDetail {
 }
 
 class Product {
-    ProductId: number;
+    Id: number;
     ProductName: string;
     UnitPrice: number;
 
-    constructor(productId: number, productName: string, unitPrice: number) {
-        this.ProductId = productId;
+    constructor(id: number, productName: string, unitPrice: number) {
+        this.Id = id;
         this.ProductName = productName;
         this.UnitPrice = unitPrice;
     }

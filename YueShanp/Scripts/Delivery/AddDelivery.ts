@@ -27,6 +27,20 @@
             }
         })
 
+        .filter('selectedProductUnitPrice', function ($filter) {
+            return function (input: string, productList: Array<Product>) {
+                var unitPrice = 0;
+                var inputId = parseInt(input);
+                productList.forEach(product => {
+                    if (unitPrice == 0 && inputId != 0 && product.Id === inputId) {
+                        debugger;
+                        return unitPrice = product.UnitPrice;
+                    }
+                });
+                return unitPrice;
+            };
+        })
+
         .controller('addDeliveryCtrl', ['$scope', '$filter', 'YSService', '$window', 'addDeliveryFactory',
             function ($scope, $filter, ysService: IYSService, $window: ng.IWindowService, addDeliveryFactory: IAddDeliveryFactory) {
                 // FUNCTIONs
@@ -38,7 +52,9 @@
                     return $filter('date')(date, $scope.format);
                 };
                 $scope.AddProduct = function () {
-                    $scope.deliveryOrderDetailList.push(new DeliveryOrderDetail(0, new Product(0, '', 0)));
+                    $scope.deliveryOrderDetailList.push(
+                        new DeliveryOrderDetail(0,
+                            new Product(0, '', 0)));
                 };
 
                 $scope.getOrderTotalAmount = function () {
@@ -83,7 +99,7 @@
                     ysService.GetProductList($scope.selectedCustomer || 0).then(function (data) {
                         $scope.productList = data;
                     });
-                };
+                };                
 
 
                 // ATTRIBUTEs

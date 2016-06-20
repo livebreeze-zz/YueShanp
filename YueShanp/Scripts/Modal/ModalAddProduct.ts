@@ -31,6 +31,10 @@
                 if (data && data.IsSuccess) {
                     _alert.addClass('alert-success').html('<strong>DONE!</strong> 新增/修改商品完成').fadeIn();
                     setTimeout(function () {
+                        // angular 刷新 productNameList
+                        var $scope: any = angular.element('#addDeliveryBody').scope();
+                        $scope.ResetProductList();
+
                         _modal.modal('hide');
                     }, 1000)
                 } else {

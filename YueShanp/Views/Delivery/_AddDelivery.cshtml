@@ -5,7 +5,7 @@
     var customerList = (List<Customer>)ViewData[nameof(DeliveryIndexViewModel.CustomerList)];
 }
 
-<div id="addDelivery">
+<div id="addDeliveryBody" ng-app="mvcApp" ng-controller="addDeliveryCtrl">
     <!--Add Delivery-->
     <form role="form">
         <div class="row">
@@ -87,11 +87,10 @@
                         </td>
                         <td class="td_index">{{$index +1}}</td>
                         <td class="td_productName">
-                            <input type="text" class="form-control input-sm" list="productNameList" ng-model="deliveryOrderDetail.Product.ProductName" />
+                            <input type="text" class="form-control input-sm" list="productNameList" ng-model="deliveryOrderDetail.Product.Id" />
                         </td>
-                        <td class="td_unitPrice">
-                            {{deliveryOrderDetail.Product.UnitPrice}}
-                            @*<input type="number" class="form-control input-sm" value="" ng-model="deliveryOrderDetail.Product.UnitPrice" />*@
+                        <td class="td_unitPrice">                            
+                            <input type="number" disabled class="form-control input-sm" value="{{deliveryOrderDetail.Product.Id | selectedProductUnitPrice: productList}}" ng-model="deliveryOrderDetail.Product.UnitPrice" />
                         </td>
                         <td class="td_qty">
                             <input type="number" class="form-control input-sm" min="1" max="9999" maxlength="4" ng-model="deliveryOrderDetail.Qty" />
@@ -128,9 +127,9 @@
             </div>
         </div>
     </form>
-</div>
 
-<!-- datalist -->
-<datalist id="productNameList">
-    <option ng-repeat="product in productList">{{product.Name}}</option>
-</datalist>
+    <!-- datalist -->
+    <datalist id="productNameList">
+        <option ng-repeat="product in productList" value="{{product.Id}}">{{product.Name}}</option>
+    </datalist>
+</div>
