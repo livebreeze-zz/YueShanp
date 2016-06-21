@@ -29,6 +29,8 @@
 
         .controller('addDeliveryCtrl', ['$scope', '$filter', 'YSService', '$window', 'addDeliveryFactory',
             function ($scope, $filter, ysService: IYSService, $window: ng.IWindowService, addDeliveryFactory: IAddDeliveryFactory) {
+                var now: Date = new Date();
+
                 // FUNCTIONs
                 $scope.PrePrintClick = function () {
                     let prePrintDeliveryOrderUrl = '/Delivery/PrePrintDeliveryOrder?DONumber=' + $scope.deliveryOrderNumber;
@@ -104,8 +106,8 @@
                 // MODELs
                 //$scope.selectedCustomer = 0;
                 $scope.deliveryOrderNumber;
-                $scope.deliveryDate = $scope.FormatDate(new Date());
-                $scope.accountMonth = '';
+                $scope.deliveryDate = $scope.FormatDate(now);
+                $scope.accountMonth = (now.getFullYear() - 1911).toString() + ('0' + (now.getMonth() + 1).toString()).slice(-2);
                 $scope.deliveryOrderDetailList = new Array<DeliveryOrderDetail>();
                 $scope.customerList = ysService.GetCustomerList().then(
                     function (data: Array<Customer>) {
@@ -119,7 +121,6 @@
 
                 ////Show warning message if user leave page ---------------------------------------------------------------////
                 $scope.$watch('addDeliveryform.$dirty', function (value) {
-                    debugger;
                     if (value && !$scope.isSaved) {
                         $window.onbeforeunload = function () {
                             if (!$scope.isSaved) {

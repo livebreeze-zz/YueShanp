@@ -2,8 +2,8 @@
     angular.module('CommonHelper', [])
         .directive('drcalander', function () {
         var tpl = '<div class="input-group">' +
-            '<input name="{{name}}" type="text" class="form-control" placeholder= "yyy(民國)/MM/dd" uib-datepicker-popup="{{format}}"' +
-            'ng-model="datemodel" is-open="popupDateCalander.opened" close-text="Close" ng-click="openDateCalander()" readonly required />' +
+            '<input name="{{name}}" type="text" class="form-control" placeholder= "yyyy/MM/dd" uib-datepicker-popup="{{format}}"' +
+            'ng-model="datemodel" ng-value="datemodel" is-open="popupDateCalander.opened" close-text="Close" ng-click="openDateCalander()" readonly required />' +
             '<span class="input-group-btn" >' +
             '<button type="button" class="btn btn-default" ng-click="openDateCalander()" ><i class="fa fa-calendar" ></i></button>' +
             '</span>' +
