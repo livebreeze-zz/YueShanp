@@ -7,108 +7,112 @@
 
 <div id="addDeliveryBody" ng-app="mvcApp" ng-controller="addDeliveryCtrl">
     <!--Add Delivery-->
-    <form role="form">
+    <form name="addDeliveryform" role="form">
         <div class="row">
-            <!-- Add Delivery Basic Info -->
-            <div class="col-md-8 col-lg-8">
+            <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label>客戶名稱</label>
-                            <select id="sct_CustomerList"
-                                    class="form-control"
-                                    ng-model="selectedCustomer"
-                                    ng-options="option.value as option.name for option in customerOptions"
-                                    ng-change="ResetProductList()"></select>
+                    <!-- Add Delivery Basic Info -->
+                    <div class="col-md-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>客戶名稱</label>
+                                    <select id="sct_CustomerList"
+                                            class="form-control"
+                                            ng-model="selectedCustomer"
+                                            ng-options="option.value as option.name for option in customerOptions"
+                                            ng-change="ResetProductList()"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>送貨單編號</label>
+                                    <input type="number" class="form-control" value="" required ng-model="deliveryOrderNumber" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label>送貨單編號</label>
-                            <input type="number" class="form-control" value="" required ng-model="deliveryOrderNumber" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-lg-6">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <label>送貨日期</label>
-                                <drcalander name="startdaycal" format="{{format}}" datemodel="deliveryDate"></drcalander>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>送貨日期</label>
+                                        <drcalander name="startdaycal" format="{{format}}" datemodel="deliveryDate"></drcalander>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>帳款月份</label>
+                                    <input type="text" class="form-control" value="@(DateTime.Now.ROCYear() + DateTime.Now.ToString("MM"))" maxlength="5" placeholder="10505" required ng-model="accountMonth" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label>帳款月份</label>
-                            <input type="text" class="form-control" value="@(DateTime.Now.ROCYear() + DateTime.Now.ToString("MM"))" maxlength="5" placeholder="10505" required ng-model="accountMonth" />
-                        </div>
-                    </div>
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>項次</th>
+                                <th>品名</th>
+                                <th>單價</th>
+                                <th>數量</th>
+                                <th>小計</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="deliveryOrderDetail in deliveryOrderDetailList">
+                                <td class="td_Operation">
+                                    <a ng-click="RemoveProduct($index)">
+                                        <span class="fa-stack fa-1x">
+                                            <i class="fa fa-times fa-stack-1x"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                                <td class="td_index">{{$index +1}}</td>
+                                <td class="td_productName">
+                                    {{deliveryOrderDetail.Product.Name}}
+                                </td>
+                                <td class="td_unitPrice">
+                                    {{deliveryOrderDetail.Product.UnitPrice}}
+                                </td>
+                                <td class="td_qty">
+                                    <input type="number" class="form-control input-sm" min="1" max="9999" maxlength="4" ng-model="deliveryOrderDetail.Qty" />
+                                </td>
+                                <td class="td_subTotal">
+                                    <span class="subTotal">{{deliveryOrderDetail.Product.UnitPrice * deliveryOrderDetail.Qty | currency}}</span>
+                                </td>
+                            </tr>
+                            <tr class="table_bottomRow">
+                                <td colspan="5">
+                                </td>
+                                <td class="orderTotal">
+                                    總計：<span>{{getOrderTotalAmount() | currency}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4">
-                <label>快速動作</label>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        @*<button type="button" role="button" class="btn btn-default">尋找其他送貨單</button>*@
-                        <a ng-href="@Url.Action("ModalAddProduct", "Modal")/{{selectedCustomer}}"
-                           ng-disabled="selectedCustomer == 0"
-                           class="btn btn-default"
-                           data-toggle="modal"
-                           data-target="#modal-add-product">新增品項</a>
-                        <button type="button" role="button" class="btn btn-default">新增客戶</button>
-                    </div>
-                </div>
+            <div class="col-lg-4">
+
+                <a ng-href="@Url.Action("ModalAddProduct", "Modal")/{{selectedCustomer}}"
+                   ng-disabled="selectedCustomer == 0"
+                   class="btn btn-default"
+                   data-toggle="modal"
+                   data-target="#modal-add-product"><i class="fa fa-plus"></i> 新增品項</a>
+
+                <select multiple class="form-control product-select"
+                        data-ng-attr-size="{{deliveryOrderDetailList.length > 8 ? 20 : deliveryOrderDetailList.length + 12}}"
+                        data-ng-model="productSelected"
+                        data-ng-options="product.Id as product.Name + ' (單價: ' + product.UnitPrice + ')' for product in productList"
+                        ng-change="AddProduct()">
+                </select>
             </div>
-        </div>
-
-        <hr />
-
-        <div class="row">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>項次</th>
-                        <th>品名</th>
-                        <th>單價</th>
-                        <th>數量</th>
-                        <th>小計</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="deliveryOrderDetail in deliveryOrderDetailList">
-                        <td class="td_Operation">
-                            <a ng-click="RemoveProduct($index)">
-                                <span class="fa-stack fa-1x">
-                                    <i class="fa fa-times fa-stack-1x"></i>
-                                </span>
-                            </a>
-                        </td>
-                        <td class="td_index">{{$index +1}}</td>
-                        <td class="td_productName">
-                            <input type="text" class="form-control input-sm" list="productNameList" ng-model="deliveryOrderDetail.Product.Id" />
-                        </td>
-                        <td class="td_unitPrice">                            
-                            <input type="number" disabled class="form-control input-sm" value="{{deliveryOrderDetail.Product.Id | selectedProductUnitPrice: productList}}" ng-model="deliveryOrderDetail.Product.UnitPrice" />
-                        </td>
-                        <td class="td_qty">
-                            <input type="number" class="form-control input-sm" min="1" max="9999" maxlength="4" ng-model="deliveryOrderDetail.Qty" />
-                        </td>
-                        <td class="td_subTotal">
-                            <span class="subTotal">{{deliveryOrderDetail.Product.UnitPrice * deliveryOrderDetail.Qty | currency}}</span>
-                        </td>
-                    </tr>
-                    <tr class="table_bottomRow">
-                        <td colspan="5">
-                            <button ng-click="AddProduct()" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                        </td>
-                        <td class="orderTotal">
-                            總計：<span>{{getOrderTotalAmount() | currency}}</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
         <div class="row">
@@ -127,9 +131,4 @@
             </div>
         </div>
     </form>
-
-    <!-- datalist -->
-    <datalist id="productNameList">
-        <option ng-repeat="product in productList" value="{{product.Id}}">{{product.Name}}</option>
-    </datalist>
 </div>

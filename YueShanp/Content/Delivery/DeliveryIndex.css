@@ -1,29 +1,47 @@
 ﻿.nav-tabs {
   margin-top: 20px;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+}
 
 #addDelivery table .td_Operation {
-  width: 5%; }
-  #addDelivery table .td_Operation .fa-stack .fa-times {
-    color: #808080;
-    font-size: larger; }
-  #addDelivery table .td_Operation .fa-times:hover:before {
-    content: "\f057";
-    color: #c33;
-    font-size: x-large; }
+  width: 5%;
+}
+
+#addDelivery table .td_Operation .fa-stack .fa-times {
+  color: #808080;
+  font-size: larger;
+}
+
+#addDelivery table .td_Operation .fa-times:hover:before {
+  content: "\f057";
+  color: #c33;
+  font-size: x-large;
+}
 
 #addDelivery table .td_index {
-  width: 5%; }
+  width: 5%;
+}
 
 #addDelivery table .td_productName {
-  width: 40%; }
+  width: 40%;
+}
 
 #addDelivery table .td_unitPrice {
-  width: 10%; }
+  width: 10%;
+}
 
 #addDelivery table .td_qty {
-  width: 10%; }
+  width: 10%;
+}
 
 #addDelivery table .td_subTotal {
-  width: 30%; }
+  width: 30%;
+}
 
+.product-select {
+  position: fixed;
+  margin-bottom: 15px;
+  max-width: 400px;
+}
+
+/*# sourceMappingURL=DeliveryIndex.css.map */

@@ -8,7 +8,6 @@
         GetCustomerOptions(customerList: Customer[])
     }
 
-
     angular.module('mvcApp', ['ui.bootstrap', 'ServiceCommon', 'CommonHelper'])
 
         .factory('addDeliveryFactory', function () {
@@ -27,19 +26,6 @@
             }
         })
 
-        .filter('selectedProductUnitPrice', function ($filter) {
-            return function (input: string, productList: Array<Product>) {
-                var unitPrice = 0;
-                var inputId = parseInt(input);
-                productList.forEach(product => {
-                    if (unitPrice == 0 && inputId != 0 && product.Id === inputId) {
-                        debugger;
-                        return unitPrice = product.UnitPrice;
-                    }
-                });
-                return unitPrice;
-            };
-        })
 
         .controller('addDeliveryCtrl', ['$scope', '$filter', 'YSService', '$window', 'addDeliveryFactory',
             function ($scope, $filter, ysService: IYSService, $window: ng.IWindowService, addDeliveryFactory: IAddDeliveryFactory) {
@@ -52,9 +38,19 @@
                     return $filter('date')(date, $scope.format);
                 };
                 $scope.AddProduct = function () {
-                    $scope.deliveryOrderDetailList.push(
-                        new DeliveryOrderDetail(0,
-                            new Product(0, '', 0)));
+                    angular.forEach($scope.productSelected, function (selectedId: number) {
+                        angular.forEach($scope.productList, function (product: Product) {
+                            if (selectedId == product.Id) {
+                                // 防止重複加入
+                                var dodList: Array<DeliveryOrderDetail> = $scope.deliveryOrderDetailList;
+                                if (!dodList.some(elem => elem.Product.Id == selectedId)) {
+                                    $scope.deliveryOrderDetailList.push(new DeliveryOrderDetail(0, product));
+                                }
+
+                                return;
+                            }
+                        });
+                    });
                 };
 
                 $scope.getOrderTotalAmount = function () {
@@ -117,11 +113,13 @@
                         $scope.selectedCustomer = $scope.customerOptions[0].value;
                     });
 
-                //$scope.productList = ysService.GetProductList($scope.selectedCustomer || 0);
                 $scope.productList = new Array<Product>();
+                $scope.productSelected = '';
+
 
                 ////Show warning message if user leave page ---------------------------------------------------------------////
-                $scope.$watch('drform.$dirty', function (value) {
+                $scope.$watch('addDeliveryform.$dirty', function (value) {
+                    debugger;
                     if (value && !$scope.isSaved) {
                         $window.onbeforeunload = function () {
                             if (!$scope.isSaved) {

@@ -1,10 +1,10 @@
 ﻿$navTabTop: 20px;
-$navTabBottom: 15px;
+$normalMarginBottom: 15px;
 $orderTotalLeftAlign: -30px;
 
 .nav-tabs {
     margin-top: $navTabTop;
-    margin-bottom: $navTabBottom;
+    margin-bottom: $normalMarginBottom;
 }
 
 #addDelivery table {
@@ -42,4 +42,10 @@ $orderTotalLeftAlign: -30px;
     .td_subTotal {
         width: 30%;
     }
+}
+
+.product-select {
+    position: fixed;
+    margin-bottom: $normalMarginBottom;
+    max-width: 400px;
 }
