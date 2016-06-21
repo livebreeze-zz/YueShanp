@@ -22,9 +22,15 @@
         function ($scope, $filter, ysService, $window, addDeliveryFactory) {
             var now = new Date();
             // FUNCTIONs
-            $scope.PrePrintClick = function () {
-                var prePrintDeliveryOrderUrl = '/Delivery/PrePrintDeliveryOrder?DONumber=' + $scope.deliveryOrderNumber;
-                $window.open(prePrintDeliveryOrderUrl, 'DeliveryPrint', 'height=800,width=800');
+            $scope.PrePrintClick = function ($event) {
+                var thisButton = angular.element($event.target);
+                thisButton.button('loading');
+                var callback = function () {
+                    thisButton.button('reset');
+                    var prePrintDeliveryOrderUrl = '/Delivery/PrePrintDeliveryOrder?DONumber=' + $scope.deliveryOrderNumber;
+                    $window.open(prePrintDeliveryOrderUrl, 'DeliveryPrint', 'height=800,width=800');
+                };
+                $scope.SavePrint(callback);
             };
             $scope.FormatDate = function (date) {
                 return $filter('date')(date, $scope.format);
@@ -50,8 +56,7 @@
                 });
                 return result;
             };
-            $scope.SavePrint = function () {
-                //var customerId = $scope.customerId;
+            $scope.SavePrint = function (callback) {
                 var customerSONumber = $scope.CustomerSONumber;
                 var deliveryOrderDate = $scope.deliveryDate;
                 var deliveryOrderNumber = $scope.deliveryOrderNumber;
@@ -69,7 +74,7 @@
                 };
                 ysService.PostDeliveryOrder(config);
                 $scope.isSaved = true;
-                // TODO 修改 MODAL 由 SERVICE 取值，或者先將資料記載臨時資料區
+                callback();
             };
             $scope.RemoveProduct = function (index) {
                 $scope.deliveryOrderDetailList.splice(index, 1);

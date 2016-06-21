@@ -12,7 +12,7 @@
                 restrict: 'E',
                 template: tpl,
                 replace: true,
-                scope: { format: '@', datemodel: '=',  name: '@' },
+                scope: { format: '@', datemodel: '=', name: '@' },
                 link: function (scope: any) {
                     scope.openDateCalander = function () {
                         scope.popupDateCalander.opened = true;

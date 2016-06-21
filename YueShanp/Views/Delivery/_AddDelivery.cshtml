@@ -121,10 +121,11 @@
                     <a href="#"
                        class="btn btn-primary"
                        ng-disabled="selectedCustomer == 0"
-                       ng-click="PrePrintClick()">
+                       ng-click="PrePrintClick($event)"
+                       data-loading-text="<i class='fa fa-spinner fa-pulse fa-fw margin-bottom'></i> 儲存中...">
                         儲存並列印
                     </a>@*ng-click="SavePrint()"*@
-                    <button class="btn btn-primary">儲存</button>
+                    <a class="btn btn-primary">儲存</a>
                     <button class="btn btn-primary">儲存並新增</button>
                     <a href="@Url.Action(nameof(CustomerController.CustomerIndex), nameof(CustomerController).Substring(0, nameof(CustomerController).Length - 10))" class="btn btn-default">取消並返回客戶管理</a>
                 </div>
