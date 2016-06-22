@@ -57,15 +57,16 @@ namespace YueShanp.Controllers
         [HttpPost]
         public JsonResult AddDeliveryOrder([Bind(Include = "Id,DeliveryOrderNumber,CustomerSONumber,DeliveryOrderDate,ReceivableMonth,Customer,DeliveryOrderDetailList")] DeliveryOrder deliveryOrderModel)
         {
-            if (!ModelState.IsValid)
-            {
-                this.responseDic[ERRORMESSAGE] = VALIDATIONERRORMESSAGE;
-                return Json(this.responseDic);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    this.responseDic[ERRORMESSAGE] = VALIDATIONERRORMESSAGE;
+            //    return Json(this.responseDic);
+            //}
 
             deliveryOrderModel.CreateTime = deliveryOrderModel.LastEditTime = DateTime.Now;
             deliveryOrderModel.Creator = deliveryOrderModel.LastEditor = User.Identity.Name;
             deliveryOrderModel.EntityStatus = EntityStatus.Enabled;
+            //deliveryOrderModel.DeliveryOrderDate = DateTime.TryParse(deliveryOrderModel.DeliveryOrderDate,
 
             try
             {
