@@ -72,9 +72,10 @@
                         DeliveryOrderDetailList: deliveryOrderDetailList
                     }
                 };
-                ysService.PostDeliveryOrder(config);
-                $scope.isSaved = true;
-                callback();
+                ysService.PostDeliveryOrder(config).then(function () {
+                    $scope.isSaved = true;
+                    callback();
+                });
             };
             $scope.RemoveProduct = function (index) {
                 $scope.deliveryOrderDetailList.splice(index, 1);

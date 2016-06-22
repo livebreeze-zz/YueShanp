@@ -30,6 +30,12 @@ namespace YueShanp.Models
             {
                 this.db.DeliveryOrders.Add(instance);
                 db.Entry(instance.Customer).State = EntityState.Unchanged;
+                instance.DeliveryOrderDetailList.ForEach(deliveryOrderDetail =>
+                    {
+                        deliveryOrderDetail.DeliveryUnitPrice = deliveryOrderDetail.Product.UnitPrice;
+                        db.Entry(deliveryOrderDetail.Product).State = EntityState.Unchanged;
+                    }
+                );
 
                 this.SaveChanges();
             }
